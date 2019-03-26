@@ -41,7 +41,7 @@ public class CommandHandlerConfiguration {
 
     @Bean
     public ReversePaymentHandler reversePaymentHandler() {
-        return new ReversePaymentHandler(eventBus, accountRepository, paymentRepository);
+        return new ReversePaymentHandler(eventBus, accountRepository);
     }
 
     @Bean

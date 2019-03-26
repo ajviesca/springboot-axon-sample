@@ -4,7 +4,6 @@ import com.ing.asia.bps3.core.axon.saga.payment.command.api.ReversePaymentComman
 import com.ing.asia.bps3.core.axon.saga.payment.event.api.PaymentReversedEvent;
 import com.ing.asia.bps3.core.domain.account.Account;
 import com.ing.asia.bps3.core.domain.account.AccountRepository;
-import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventhandling.EventBus;
 
@@ -13,12 +12,10 @@ import java.math.BigDecimal;
 public class ReversePaymentHandler extends BaseCommandHandler<ReversePaymentCommand> {
 
     private final AccountRepository accountRepository;
-    private final PaymentRepository paymentRepository;
 
-    public ReversePaymentHandler(EventBus eventBus, AccountRepository accountRepository, PaymentRepository paymentRepository) {
+    public ReversePaymentHandler(EventBus eventBus, AccountRepository accountRepository) {
         super(eventBus);
         this.accountRepository = accountRepository;
-        this.paymentRepository = paymentRepository;
     }
 
     @CommandHandler

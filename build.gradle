@@ -22,6 +22,7 @@ repositories {
 
 
 def AXON_STARTER_VERSION='4.1'
+def SPOCK_VERSION='1.2-groovy-2.5'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -33,5 +34,6 @@ dependencies {
 
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'junit:junit:4.12'
+//    testImplementation 'junit:junit:4.12'
+    testImplementation "org.spockframework:spock-spring:${SPOCK_VERSION}"
 }

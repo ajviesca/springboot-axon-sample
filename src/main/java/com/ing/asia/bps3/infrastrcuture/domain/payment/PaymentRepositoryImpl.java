@@ -35,7 +35,6 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         BillerEntity billerEntity = new BillerEntity(sourceBiller.getId(), sourceBiller.getBillerName());
         PaymentEntity paymentEntity = new PaymentEntity(payment.getId(), payment.getAmount(), billerEntity,
                 payment.getPostDate(), payment.getStatus(), payment.getPaidByAccountId());
-        ;
         PaymentEntity saved = paymentJPA.save(paymentEntity);
         billerEntity = saved.getBiller();
         return new Payment(saved.getId(), saved.getAmount(),
@@ -47,9 +46,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     public Payment findById(Long id) {
         PaymentEntity paymentEntity = paymentJPA.findById(id).get();
         BillerEntity billerEntity = paymentEntity.getBiller();
-        Payment payment = new Payment(paymentEntity.getId(), paymentEntity.getAmount(),
+        return new Payment(paymentEntity.getId(), paymentEntity.getAmount(),
                 new Biller(billerEntity.getId(), billerEntity.getBillerName()), paymentEntity.getPostDate(),
                 paymentEntity.getStatus(), paymentEntity.getPaidByAccountId());
-        return payment;
     }
 }

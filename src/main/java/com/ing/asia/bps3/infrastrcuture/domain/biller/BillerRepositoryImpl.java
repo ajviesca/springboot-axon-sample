@@ -18,9 +18,9 @@ public class BillerRepositoryImpl implements BillerRepository {
     public List<Biller> findAll() {
         List<BillerEntity> billers = billerJPA.findAll();
 
-        return billers.stream().map(billerEntity -> {
-            return new Biller(billerEntity.getId(), billerEntity.getBillerName());
-        }).collect(Collectors.toList());
+        return billers.stream().map(billerEntity ->
+                new Biller(billerEntity.getId(), billerEntity.getBillerName())
+        ).collect(Collectors.toList());
     }
 
     @Override
