@@ -29,7 +29,7 @@ public class DebitSourceHandler extends BaseCommandHandler<DebitSourceCommand> {
         BigDecimal currentBalance = accountEntity.getBalance();
         BigDecimal amountToDeductFromCurrentBalance = command.getAmount();
 
-        if (currentBalance.compareTo(amountToDeductFromCurrentBalance) < 1) {
+        if (currentBalance.compareTo(amountToDeductFromCurrentBalance) < 0) {
             publish(new SourceAccountInsufficientBalanceEvent(command.getPaymentId(), command.getAccountId(),
                     command.getBillerId(), command.getAmount()));
         } else {
