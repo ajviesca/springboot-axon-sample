@@ -1,7 +1,7 @@
 package com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler;
 
-import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntity;
-import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerJPA;
+import com.ing.asia.bps3.core.domain.biller.Biller;
+import com.ing.asia.bps3.core.domain.biller.BillerRepository;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.api.SendPaymentCommand;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.event.api.PaymentFailedEvent;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.event.api.PaymentSuccessfulEvent;
@@ -16,16 +16,16 @@ public class SendPaymentHandler extends BaseCommandHandler<SendPaymentCommand> {
 
     private static final Logger LOG = LoggerFactory.getLogger(SendPaymentHandler.class);
 
-    private final BillerJPA billerJPA;
+    private final BillerRepository billerRepository;
 
-    public SendPaymentHandler(EventBus eventBus, BillerJPA billerJPA) {
+    public SendPaymentHandler(EventBus eventBus, BillerRepository billerRepository) {
         super(eventBus);
-        this.billerJPA = billerJPA;
+        this.billerRepository = billerRepository;
     }
 
     @CommandHandler
     public void handle(SendPaymentCommand command) {
-        BillerEntity biller = billerJPA.findById(command.getBillerId()).get();
+        Biller biller = billerRepository.findById(command.getBillerId());
 
         BigDecimal amount = command.getAmount();
 

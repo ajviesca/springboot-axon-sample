@@ -1,10 +1,9 @@
 package com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler;
 
+import com.ing.asia.bps3.core.domain.biller.Biller;
+import com.ing.asia.bps3.core.domain.biller.BillerRepository;
 import com.ing.asia.bps3.core.domain.payment.Payment;
-import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntity;
-import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerJPA;
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntity;
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA;
+import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.api.PayBillCommand;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.event.api.PaymentInProgressEvent;
 import org.axonframework.commandhandling.CommandHandler;
@@ -18,23 +17,23 @@ public class PayBillHandler extends BaseCommandHandler<PayBillCommand> {
 
     private Logger LOG = LoggerFactory.getLogger(PayBillHandler.class);
 
-    private final PaymentJPA paymentJPA;
-    private final BillerJPA billerJPA;
+    private final PaymentRepository paymentRepository;
+    private final BillerRepository billerRepository;
 
-    public PayBillHandler(EventBus eventBus, PaymentJPA paymentJPA, BillerJPA billerJPA) {
+    public PayBillHandler(EventBus eventBus, PaymentRepository paymentRepository, BillerRepository billerRepository) {
         super(eventBus);
-        this.paymentJPA = paymentJPA;
-        this.billerJPA = billerJPA;
+        this.paymentRepository = paymentRepository;
+        this.billerRepository = billerRepository;
     }
 
     @CommandHandler
     public void handle(PayBillCommand command) {
-        BillerEntity billerEntity = billerJPA.findById(command.getBillerId()).get();
-        PaymentEntity paymentEntity = new PaymentEntity(System.currentTimeMillis(),
-                command.getAmount(), billerEntity, LocalDateTime.now(), Payment.Status.PLACED, command.getAccountId());
-        paymentEntity = paymentJPA.save(paymentEntity);
-        publish(new PaymentInProgressEvent(paymentEntity.getId(), paymentEntity.getPaidByAccountId(),
-                billerEntity.getId(), paymentEntity.getAmount()));
+        Biller biller = billerRepository.findById(command.getBillerId());
+        Payment payment = new Payment(System.currentTimeMillis(),
+                command.getAmount(), biller, LocalDateTime.now(), Payment.Status.PLACED, command.getAccountId());
+        payment = paymentRepository.save(payment);
+        publish(new PaymentInProgressEvent(payment.getId(), payment.getPaidByAccountId(),
+                biller.getId(), payment.getAmount()));
     }
 
 

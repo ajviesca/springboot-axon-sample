@@ -1,7 +1,7 @@
 package com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler;
 
-import com.ing.asia.bps3.infrastrcuture.domain.account.AccountEntity;
-import com.ing.asia.bps3.infrastrcuture.domain.account.AccountJPA;
+import com.ing.asia.bps3.core.domain.account.Account;
+import com.ing.asia.bps3.core.domain.account.AccountRepository;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.api.DebitSourceCommand;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.event.api.SourceAccountInsufficientBalanceEvent;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.event.api.SourceDebitedEvent;
@@ -16,25 +16,25 @@ public class DebitSourceHandler extends BaseCommandHandler<DebitSourceCommand> {
 
     private Logger LOG = LoggerFactory.getLogger(DebitSourceHandler.class);
 
-    private final AccountJPA accountJPA;
+    private final AccountRepository accountRepository;
 
-    public DebitSourceHandler(EventBus eventBus, AccountJPA accountJPA) {
+    public DebitSourceHandler(EventBus eventBus, AccountRepository accountRepository) {
         super(eventBus);
-        this.accountJPA = accountJPA;
+        this.accountRepository = accountRepository;
     }
 
     @CommandHandler
     public void handle(DebitSourceCommand command) {
-        AccountEntity accountEntity = accountJPA.findById(command.getAccountId()).get();
-        BigDecimal currentBalance = accountEntity.getBalance();
+        Account account = accountRepository.findById(command.getAccountId());
+        BigDecimal currentBalance = account.getBalance();
         BigDecimal amountToDeductFromCurrentBalance = command.getAmount();
 
         if (currentBalance.compareTo(amountToDeductFromCurrentBalance) < 0) {
             publish(new SourceAccountInsufficientBalanceEvent(command.getPaymentId(), command.getAccountId(),
                     command.getBillerId(), command.getAmount()));
         } else {
-            accountEntity.setBalance(currentBalance.subtract(amountToDeductFromCurrentBalance));
-            accountJPA.save(accountEntity);
+            account.setBalance(currentBalance.subtract(amountToDeductFromCurrentBalance));
+            accountRepository.save(account);
             publish(new SourceDebitedEvent(command.getPaymentId(), command.getAccountId(), command.getBillerId(),
                     command.getAmount()));
         }

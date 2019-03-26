@@ -1,8 +1,8 @@
 package com.ing.asia.bps3.configuration;
 
-import com.ing.asia.bps3.infrastrcuture.domain.account.AccountJPA;
-import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerJPA;
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA;
+import com.ing.asia.bps3.core.domain.account.AccountRepository;
+import com.ing.asia.bps3.core.domain.biller.BillerRepository;
+import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
 import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler.*;
 import org.axonframework.eventhandling.EventBus;
 import org.springframework.context.annotation.Bean;
@@ -12,40 +12,41 @@ import org.springframework.context.annotation.Configuration;
 public class CommandHandlerConfiguration {
 
     private final EventBus eventBus;
-    private final PaymentJPA paymentJPA;
-    private final BillerJPA billerJPA;
-    private final AccountJPA accountJpa;
+    private final PaymentRepository paymentRepository;
+    private final BillerRepository billerRepository;
+    private final AccountRepository accountRepository;
 
-    public CommandHandlerConfiguration(EventBus eventBus, PaymentJPA paymentJPA, BillerJPA billerJPA, AccountJPA accountJpa) {
+    public CommandHandlerConfiguration(EventBus eventBus, PaymentRepository paymentRepository,
+                                       BillerRepository billerRepository, AccountRepository accountRepository) {
         this.eventBus = eventBus;
-        this.paymentJPA = paymentJPA;
-        this.billerJPA = billerJPA;
-        this.accountJpa = accountJpa;
+        this.paymentRepository = paymentRepository;
+        this.billerRepository = billerRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Bean
     public PayBillHandler payBillHandler() {
-        return new PayBillHandler(eventBus, paymentJPA, billerJPA);
+        return new PayBillHandler(eventBus, paymentRepository, billerRepository);
     }
 
     @Bean
     public DebitSourceHandler debitSourceHandler() {
-        return new DebitSourceHandler(eventBus, accountJpa);
+        return new DebitSourceHandler(eventBus, accountRepository);
     }
 
     @Bean
     public SendPaymentHandler sendPaymentHandler() {
-        return new SendPaymentHandler(eventBus, billerJPA);
+        return new SendPaymentHandler(eventBus, billerRepository);
     }
 
     @Bean
     public ReversePaymentHandler reversePaymentHandler() {
-        return new ReversePaymentHandler(eventBus, accountJpa, paymentJPA);
+        return new ReversePaymentHandler(eventBus, accountRepository, paymentRepository);
     }
 
     @Bean
     public EndPaymentHandler paymentHandler() {
-        return new EndPaymentHandler(eventBus, paymentJPA);
+        return new EndPaymentHandler(eventBus, paymentRepository);
     }
 
 }

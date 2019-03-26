@@ -34,7 +34,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         Biller sourceBiller = payment.getBiller();
         BillerEntity billerEntity = new BillerEntity(sourceBiller.getId(), sourceBiller.getBillerName());
         PaymentEntity paymentEntity = new PaymentEntity(payment.getId(), payment.getAmount(), billerEntity,
-                payment.getPostDate(), Payment.Status.PLACED, payment.getPaidByAccountId());
+                payment.getPostDate(), payment.getStatus(), payment.getPaidByAccountId());
         ;
         PaymentEntity saved = paymentJPA.save(paymentEntity);
         billerEntity = saved.getBiller();
