@@ -1,5 +1,6 @@
 package com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.handler;
 
+import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntity;
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerJPA;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntity;
@@ -28,11 +29,9 @@ public class PayBillHandler extends BaseCommandHandler<PayBillCommand> {
 
     @CommandHandler
     public void handle(PayBillCommand command) {
-        PaymentEntity paymentEntity = new PaymentEntity(System.currentTimeMillis(),
-                command.getAmount(), LocalDateTime.now());
         BillerEntity billerEntity = billerJPA.findById(command.getBillerId()).get();
-        paymentEntity.setBiller(billerEntity);
-        paymentEntity.setPaidByAccountId(command.getAccountId());
+        PaymentEntity paymentEntity = new PaymentEntity(System.currentTimeMillis(),
+                command.getAmount(), billerEntity, LocalDateTime.now(), Payment.Status.PLACED, command.getAccountId());
         paymentEntity = paymentJPA.save(paymentEntity);
         publish(new PaymentInProgressEvent(paymentEntity.getId(), paymentEntity.getPaidByAccountId(),
                 billerEntity.getId(), paymentEntity.getAmount()));

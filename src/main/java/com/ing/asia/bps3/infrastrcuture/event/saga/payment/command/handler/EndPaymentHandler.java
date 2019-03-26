@@ -24,6 +24,7 @@ public class EndPaymentHandler extends BaseCommandHandler<EndPaymentCommand> {
         LOG.info("end payment handler enter");
         PaymentEntity payment = paymentJPA.findById(command.getPaymentId()).get();
         payment.setStatus(command.getPaymentStatus());
+        paymentJPA.save(payment);
         publish(new PaymentEndedEvent(command.getPaymentId(), command.getAccountId(), command.getBillerId(),
                 command.getAmount()));
         LOG.info("end payment handler exit");

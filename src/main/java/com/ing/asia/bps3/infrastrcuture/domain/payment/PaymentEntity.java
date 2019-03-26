@@ -22,18 +22,20 @@ public class PaymentEntity {
     private LocalDateTime postDate;
 
     @Enumerated(EnumType.STRING)
-    private Payment.Status status = Payment.Status.PLACED;
+    private Payment.Status status;
 
     private Long paidByAccountId;
 
     public PaymentEntity() {
-
     }
 
-    public PaymentEntity(Long id, BigDecimal amount, LocalDateTime postDate) {
+    public PaymentEntity(Long id, BigDecimal amount, BillerEntity biller, LocalDateTime postDate, Payment.Status status, Long paidByAccountId) {
         this.id = id;
         this.amount = amount;
+        this.biller = biller;
         this.postDate = postDate;
+        this.status = status;
+        this.paidByAccountId = paidByAccountId;
     }
 
     public Long getId() {

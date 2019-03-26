@@ -21,10 +21,10 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment postPayment(PostPaymentSave postPaymentSave) {
         Biller biller = billerRepository.findById(postPaymentSave.getBillerId());
-        Payment payment = new Payment(postPaymentSave.getId(),
+        Payment payment = new Payment(System.currentTimeMillis(),
                 postPaymentSave.getAmount(),
                 biller,
-                LocalDateTime.now());
+                LocalDateTime.now(), Payment.Status.PLACED, postPaymentSave.getAccountId());
         return paymentRepository.save(payment);
     }
 

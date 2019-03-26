@@ -3,17 +3,10 @@ package com.ing.asia.bps3.infrastrcuture.domain.payment;
 import java.math.BigDecimal;
 
 public class PostPaymentSave {
-    private Long id;
     private Long billerId;
     private BigDecimal amount;
+    private Long accountId;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getBillerId() {
         return billerId;
@@ -29,5 +22,13 @@ public class PostPaymentSave {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 }
