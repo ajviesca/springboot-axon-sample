@@ -1,24 +1,20 @@
 package com.ing.asia.bps3.core.axon.saga.payment;
 
-import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.core.axon.saga.payment.command.api.DebitSourceCommand;
 import com.ing.asia.bps3.core.axon.saga.payment.command.api.EndPaymentCommand;
 import com.ing.asia.bps3.core.axon.saga.payment.command.api.ReversePaymentCommand;
 import com.ing.asia.bps3.core.axon.saga.payment.command.api.SendPaymentCommand;
 import com.ing.asia.bps3.core.axon.saga.payment.event.api.*;
+import com.ing.asia.bps3.core.domain.payment.Payment;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.modelling.saga.EndSaga;
 import org.axonframework.modelling.saga.SagaEventHandler;
 import org.axonframework.modelling.saga.StartSaga;
 import org.axonframework.spring.stereotype.Saga;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Saga
 public class PaymentSaga {
-
-    private static final transient Logger LOG = LoggerFactory.getLogger(PaymentSaga.class);
 
     @Autowired
     private transient CommandGateway commandGateway;

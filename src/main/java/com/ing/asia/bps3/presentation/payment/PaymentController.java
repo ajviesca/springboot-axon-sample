@@ -1,14 +1,13 @@
 package com.ing.asia.bps3.presentation.payment;
 
-import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.core.axon.saga.payment.command.api.PayBillCommand;
 import com.ing.asia.bps3.core.axon.saga.payment.event.api.PaymentEndedEvent;
+import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PostPaymentSave;
+import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -17,9 +16,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payment")
+@Slf4j
 public class PaymentController {
 
-    private final static Logger LOG = LoggerFactory.getLogger(PaymentController.class);
     private final PaymentService paymentService;
     private final CommandGateway commandGateway;
 
@@ -49,7 +48,7 @@ public class PaymentController {
 
     @EventHandler
     public void on(PaymentEndedEvent paymentEndedEvent) {
-        LOG.info("payment ended axon received :: paymentId = {}", paymentEndedEvent.getPaymentId());
+        log.info("payment ended axon received :: paymentId = {}", paymentEndedEvent.getPaymentId());
         Payment payment = paymentService.findById(paymentEndedEvent.getPaymentId());
         deferredResult.setResult(ResponseEntity.ok(payment));
     }
