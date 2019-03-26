@@ -3,7 +3,7 @@ package com.ing.asia.bps3.configuration;
 import com.ing.asia.bps3.infrastrcuture.domain.account.AccountJPA;
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerJPA;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA;
-import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.handler.*;
+import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler.*;
 import org.axonframework.eventhandling.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

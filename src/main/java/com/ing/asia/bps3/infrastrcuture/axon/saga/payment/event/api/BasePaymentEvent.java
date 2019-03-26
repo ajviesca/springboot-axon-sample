@@ -1,18 +1,18 @@
-package com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.api;
+package com.ing.asia.bps3.infrastrcuture.axon.saga.payment.event.api;
 
 import java.math.BigDecimal;
 
-public class BasePaymentCommand {
+public class BasePaymentEvent {
 
     private Long paymentId;
     private Long accountId;
     private Long billerId;
     private BigDecimal amount;
 
-    public BasePaymentCommand() {
+    public BasePaymentEvent() {
     }
 
-    public BasePaymentCommand(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public BasePaymentEvent(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
         this.paymentId = paymentId;
         this.accountId = accountId;
         this.billerId = billerId;
