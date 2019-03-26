@@ -1,9 +1,9 @@
 package com.ing.asia.bps3.infrastrcuture.domain.payment;
 
-import com.ing.asia.bps3.core.entity.biller.Biller;
-import com.ing.asia.bps3.core.entity.biller.BillerRepository;
-import com.ing.asia.bps3.core.entity.payment.Payment;
-import com.ing.asia.bps3.core.entity.payment.PaymentRepository;
+import com.ing.asia.bps3.core.domain.biller.Biller;
+import com.ing.asia.bps3.core.domain.biller.BillerRepository;
+import com.ing.asia.bps3.core.domain.payment.Payment;
+import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

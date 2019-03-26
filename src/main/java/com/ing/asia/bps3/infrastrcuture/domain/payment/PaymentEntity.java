@@ -1,6 +1,6 @@
 package com.ing.asia.bps3.infrastrcuture.domain.payment;
 
-import com.ing.asia.bps3.core.entity.payment.Payment;
+import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntity;
 
 import javax.persistence.*;

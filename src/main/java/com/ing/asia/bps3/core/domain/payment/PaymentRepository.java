@@ -1,4 +1,4 @@
-package com.ing.asia.bps3.core.entity.payment;
+package com.ing.asia.bps3.core.domain.payment;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.ing.asia.bps3.core.entity.biller;
+package com.ing.asia.bps3.core.domain.biller;
 
 public class Biller {
     private Long id;

@@ -1,7 +1,7 @@
 package com.ing.asia.bps3.presentation.biller;
 
 
-import com.ing.asia.bps3.core.entity.biller.Biller;
+import com.ing.asia.bps3.core.domain.biller.Biller;
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.ing.asia.bps3.core.entity.account;
+package com.ing.asia.bps3.core.domain.account;
 
 import java.math.BigDecimal;
 

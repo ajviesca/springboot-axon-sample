@@ -1,7 +1,7 @@
 package com.ing.asia.bps3.infrastrcuture.domain.biller;
 
-import com.ing.asia.bps3.core.entity.biller.Biller;
-import com.ing.asia.bps3.core.entity.biller.BillerRepository;
+import com.ing.asia.bps3.core.domain.biller.Biller;
+import com.ing.asia.bps3.core.domain.biller.BillerRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,6 +1,6 @@
 package com.ing.asia.bps3.presentation.payment;
 
-import com.ing.asia.bps3.core.entity.payment.Payment;
+import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PostPaymentSave;
 import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.api.PayBillCommand;

@@ -1,6 +1,6 @@
 package com.ing.asia.bps3.infrastrcuture.event.saga.payment;
 
-import com.ing.asia.bps3.core.entity.payment.Payment;
+import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.api.DebitSourceCommand;
 import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.api.EndPaymentCommand;
 import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.api.ReversePaymentCommand;

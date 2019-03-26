@@ -1,6 +1,6 @@
 package com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.api;
 
-import com.ing.asia.bps3.core.entity.payment.Payment;
+import com.ing.asia.bps3.core.domain.payment.Payment;
 
 import java.math.BigDecimal;
 
