@@ -1,10 +1,10 @@
-package com.ing.asia.bps3.infrastrcuture.event.api.commandhandler;
+package com.ing.asia.bps3.infrastrcuture.event.saga.payment.commandhandler;
 
 import com.ing.asia.bps3.infrastrcuture.domain.account.AccountEntity;
 import com.ing.asia.bps3.infrastrcuture.domain.account.AccountJPA;
-import com.ing.asia.bps3.infrastrcuture.event.api.command.DebitSourceCommand;
-import com.ing.asia.bps3.infrastrcuture.event.api.event.SourceAccountInsufficientBalanceEvent;
-import com.ing.asia.bps3.infrastrcuture.event.api.event.SourceDebitedEvent;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.DebitSourceCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.event.SourceAccountInsufficientBalanceEvent;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.event.SourceDebitedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventhandling.EventBus;
 import org.slf4j.Logger;

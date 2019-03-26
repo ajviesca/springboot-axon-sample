@@ -1,11 +1,11 @@
-package com.ing.asia.bps3.infrastrcuture.event.api;
+package com.ing.asia.bps3.infrastrcuture.event.saga.payment;
 
 import com.ing.asia.bps3.core.entity.payment.Payment;
-import com.ing.asia.bps3.infrastrcuture.event.api.command.DebitSourceCommand;
-import com.ing.asia.bps3.infrastrcuture.event.api.command.EndPaymentCommand;
-import com.ing.asia.bps3.infrastrcuture.event.api.command.ReversePaymentCommand;
-import com.ing.asia.bps3.infrastrcuture.event.api.command.SendPaymentCommand;
-import com.ing.asia.bps3.infrastrcuture.event.api.event.*;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.DebitSourceCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.EndPaymentCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.ReversePaymentCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.SendPaymentCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.event.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.modelling.saga.EndSaga;
 import org.axonframework.modelling.saga.SagaEventHandler;

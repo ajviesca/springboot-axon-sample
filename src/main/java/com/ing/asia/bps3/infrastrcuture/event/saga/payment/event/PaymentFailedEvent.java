@@ -1,8 +1,8 @@
-package com.ing.asia.bps3.infrastrcuture.event.api.event;
+package com.ing.asia.bps3.infrastrcuture.event.saga.payment.event;
 
 import java.math.BigDecimal;
 
-public class PaymentFailedEvent extends BasePaymentEvent  {
+public class PaymentFailedEvent extends BasePaymentEvent {
 
     public PaymentFailedEvent() {
     }

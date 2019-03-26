@@ -1,8 +1,8 @@
-package com.ing.asia.bps3.infrastrcuture.event.api.command;
+package com.ing.asia.bps3.infrastrcuture.event.saga.payment.command;
 
 import java.math.BigDecimal;
 
-public class DebitSourceCommand extends BasePaymentCommand{
+public class DebitSourceCommand extends BasePaymentCommand {
 
     public DebitSourceCommand() {
     }

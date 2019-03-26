@@ -1,11 +1,11 @@
-package com.ing.asia.bps3.infrastrcuture.event.api.commandhandler;
+package com.ing.asia.bps3.infrastrcuture.event.saga.payment.commandhandler;
 
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntity;
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerJPA;
-import com.ing.asia.bps3.infrastrcuture.event.api.command.PayBillCommand;
-import com.ing.asia.bps3.infrastrcuture.event.api.event.PaymentInProgressEvent;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntity;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.PayBillCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.event.PaymentInProgressEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventhandling.EventBus;
 import org.slf4j.Logger;

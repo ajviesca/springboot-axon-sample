@@ -1,7 +1,6 @@
 package com.ing.asia.bps3;
 
 import org.axonframework.springboot.autoconfig.AxonServerAutoConfiguration;
-import org.axonframework.springboot.autoconfig.JpaEventStoreAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

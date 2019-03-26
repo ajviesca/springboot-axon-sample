@@ -1,10 +1,10 @@
 package com.ing.asia.bps3.presentation.payment;
 
 import com.ing.asia.bps3.core.entity.payment.Payment;
-import com.ing.asia.bps3.infrastrcuture.event.api.command.PayBillCommand;
-import com.ing.asia.bps3.infrastrcuture.event.api.event.PaymentEndedEvent;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PostPaymentSave;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.PayBillCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.event.PaymentEndedEvent;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventHandler;
 import org.slf4j.Logger;

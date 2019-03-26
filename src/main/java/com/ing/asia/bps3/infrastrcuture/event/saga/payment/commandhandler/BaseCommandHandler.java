@@ -1,6 +1,6 @@
-package com.ing.asia.bps3.infrastrcuture.event.api.commandhandler;
+package com.ing.asia.bps3.infrastrcuture.event.saga.payment.commandhandler;
 
-import com.ing.asia.bps3.infrastrcuture.event.api.command.BasePaymentCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.BasePaymentCommand;
 import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.GenericEventMessage;
 
