@@ -1,4 +1,4 @@
-package com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.api;
+package com.ing.asia.bps3.core.axon.saga.payment.command.api;
 
 import com.ing.asia.bps3.core.domain.payment.Payment;
 

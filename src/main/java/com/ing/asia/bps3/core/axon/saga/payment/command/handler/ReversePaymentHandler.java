@@ -1,10 +1,10 @@
-package com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler;
+package com.ing.asia.bps3.core.axon.saga.payment.command.handler;
 
 import com.ing.asia.bps3.core.domain.account.Account;
 import com.ing.asia.bps3.core.domain.account.AccountRepository;
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
-import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.api.ReversePaymentCommand;
-import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.event.api.PaymentReversedEvent;
+import com.ing.asia.bps3.core.axon.saga.payment.command.api.ReversePaymentCommand;
+import com.ing.asia.bps3.core.axon.saga.payment.event.api.PaymentReversedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventhandling.EventBus;
 
