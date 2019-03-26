@@ -1,4 +1,4 @@
-package com.ing.asia.bps3.infrastrcuture.event.saga.payment.event;
+package com.ing.asia.bps3.infrastrcuture.event.saga.payment.event.api;
 
 import java.math.BigDecimal;
 

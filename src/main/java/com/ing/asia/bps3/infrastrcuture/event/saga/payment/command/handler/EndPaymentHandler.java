@@ -1,9 +1,9 @@
-package com.ing.asia.bps3.infrastrcuture.event.saga.payment.commandhandler;
+package com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.handler;
 
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntity;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA;
-import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.EndPaymentCommand;
-import com.ing.asia.bps3.infrastrcuture.event.saga.payment.event.PaymentEndedEvent;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.command.api.EndPaymentCommand;
+import com.ing.asia.bps3.infrastrcuture.event.saga.payment.event.api.PaymentEndedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventhandling.EventBus;
 import org.slf4j.Logger;
