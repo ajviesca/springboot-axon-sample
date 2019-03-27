@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest(controllers = [PaymentController])
-@ActiveProfiles(["test", "mockAllService"])
+@ActiveProfiles("test")
 class PaymentControllerSpecification extends Specification {
 
     @Autowired
@@ -52,13 +52,14 @@ class PaymentControllerSpecification extends Specification {
 
         then:
         result.andExpect(status().isOk())
-        List responseContent = new JsonSlurper().parseText(result.andReturn().response.contentAsString)
+        def responseContent = new JsonSlurper().parseText(result.andReturn().response.contentAsString)
 
         responseContent.size() == 1
 
-        def resultPayment = responseContent.get(0)
-        resultPayment.getAt('id') == payments.get(0).id
-        resultPayment.getAt('biller').getAt('id') == payments.get(0).biller.id
+        def resultFirstPayment = responseContent[0]
+        def sourceFirstPayment = payments[0]
+        resultFirstPayment.id == sourceFirstPayment.id
+        resultFirstPayment.biller.id == sourceFirstPayment.biller.id
     }
 
     @TestConfiguration

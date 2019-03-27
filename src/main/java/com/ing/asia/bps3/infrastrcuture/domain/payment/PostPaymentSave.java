@@ -7,6 +7,14 @@ public class PostPaymentSave {
     private BigDecimal amount;
     private Long accountId;
 
+    public PostPaymentSave() {
+    }
+
+    public PostPaymentSave(Long billerId, BigDecimal amount, Long accountId) {
+        this.billerId = billerId;
+        this.amount = amount;
+        this.accountId = accountId;
+    }
 
     public Long getBillerId() {
         return billerId;

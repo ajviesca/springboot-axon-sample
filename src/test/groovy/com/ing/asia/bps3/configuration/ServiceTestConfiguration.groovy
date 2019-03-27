@@ -15,19 +15,16 @@ class ServiceTestConfiguration {
     DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
 
     @Bean
-    @Profile(["mockAccountService", "mockAllService"])
     AccountService accountService() {
         detachedMockFactory.Stub(AccountService);
     }
 
     @Bean
-    @Profile(["mockBillerService", "mockAllService"])
     BillerService billerService() {
         detachedMockFactory.Stub(BillerService);
     }
 
     @Bean
-    @Profile(["mockPaymentService", "mockAllService"])
     PaymentService paymentService() {
         detachedMockFactory.Stub(PaymentService);
     }
