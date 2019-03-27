@@ -7,8 +7,10 @@ import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
 import org.axonframework.eventhandling.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
+@Profile("!test")
 public class CommandHandlerConfiguration {
 
     private final EventBus eventBus;

@@ -11,8 +11,10 @@ import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
+@Profile("!test")
 public class RepositoryConfiguration {
 
     private final PaymentJPA paymentJPA;

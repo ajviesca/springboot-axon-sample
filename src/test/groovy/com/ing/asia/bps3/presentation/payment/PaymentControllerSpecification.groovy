@@ -1,25 +1,30 @@
 package com.ing.asia.bps3.presentation.payment
 
+
+import com.ing.asia.bps3.configuration.ServiceTestConfiguration
 import com.ing.asia.bps3.core.domain.biller.Biller
 import com.ing.asia.bps3.core.domain.payment.Payment
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService
+import groovy.json.JsonSlurper
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.mock.DetachedMockFactory
 
 import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest(controllers = [PaymentController])
+@ActiveProfiles(["test", "mockAllService"])
 class PaymentControllerSpecification extends Specification {
 
     @Autowired
@@ -33,7 +38,7 @@ class PaymentControllerSpecification extends Specification {
 
     def "should return payment history"() {
         given:
-        LocalDateTime postedDate = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        LocalDateTime postedDate = LocalDateTime.now();
         List<Payment> payments = [
                 new Payment(1L, new BigDecimal(1000), meralcoBiller, postedDate, Payment.Status.COMPLETED,
                         1L)
@@ -47,18 +52,19 @@ class PaymentControllerSpecification extends Specification {
 
         then:
         result.andExpect(status().isOk())
-        result.andReturn().response.contentAsString == '[{"id":1,"amount":1000,"biller":{"id":1,"billerName":"Meralco"},"postDate":"' +postedDate+ '","status":"COMPLETED","paidByAccountId":1}]'
+        List responseContent = new JsonSlurper().parseText(result.andReturn().response.contentAsString)
 
+        responseContent.size() == 1
+
+        def resultPayment = responseContent.get(0)
+        resultPayment.getAt('id') == payments.get(0).id
+        resultPayment.getAt('biller').getAt('id') == payments.get(0).biller.id
     }
 
     @TestConfiguration
-    static class StubServiceConfig {
+    @Import([ServiceTestConfiguration])
+    static class PaymentControllerSpecificationConfig {
         DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
-
-        @Bean
-        PaymentService paymentService() {
-            return detachedMockFactory.Stub(PaymentService);
-        }
 
         @Bean
         CommandGateway commandGateway() {
