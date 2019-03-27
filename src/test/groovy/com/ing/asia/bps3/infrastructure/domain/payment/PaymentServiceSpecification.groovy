@@ -1,6 +1,7 @@
 package com.ing.asia.bps3.infrastructure.domain.payment
 
-import com.ing.asia.bps3.configuration.RepositoryConfiguration
+import com.ing.asia.bps3.configuration.JpaTestConfiguration
+import com.ing.asia.bps3.configuration.RepositoryTestConfiguration
 import com.ing.asia.bps3.configuration.ServiceTestConfiguration
 import com.ing.asia.bps3.core.domain.biller.Biller
 import com.ing.asia.bps3.core.domain.biller.BillerRepository
@@ -61,12 +62,12 @@ class PaymentServiceSpecification extends Specification {
     }
 
     @TestConfiguration
-    @Import([RepositoryConfiguration, ServiceTestConfiguration])
+    @Import([JpaTestConfiguration, RepositoryTestConfiguration, ServiceTestConfiguration])
     static class PaymentControllerSpecificationConfig {
 
         @Bean
         @Primary
-        PaymentService customPaymentService(PaymentRepository paymentRepository, BillerRepository billerRepository) {
+        PaymentService overrideDefaultPaymentService(PaymentRepository paymentRepository, BillerRepository billerRepository) {
             return new PaymentServiceImpl(paymentRepository, billerRepository)
         }
     }
