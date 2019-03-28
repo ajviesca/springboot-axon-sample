@@ -37,8 +37,8 @@ public class CommandHandlerConfiguration {
     }
 
     @Bean
-    public SendPaymentHandler sendPaymentHandler() {
-        return new SendPaymentHandler(eventBus, billerRepository);
+    public SendPaymentToBillerHandler sendPaymentHandler() {
+        return new SendPaymentToBillerHandler(eventBus, billerRepository);
     }
 
     @Bean

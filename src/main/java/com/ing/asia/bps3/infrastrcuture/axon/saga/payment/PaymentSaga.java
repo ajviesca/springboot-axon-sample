@@ -3,7 +3,7 @@ package com.ing.asia.bps3.infrastrcuture.axon.saga.payment;
 import com.ing.asia.bps3.core.event.payment.command.api.DebitSourceAccountCommand;
 import com.ing.asia.bps3.core.event.payment.command.api.UpdatePaymentStatusCommand;
 import com.ing.asia.bps3.core.event.payment.command.api.ReversePaymentCommand;
-import com.ing.asia.bps3.core.event.payment.command.api.SendPaymentCommand;
+import com.ing.asia.bps3.core.event.payment.command.api.SendPaymentToBillerCommand;
 import com.ing.asia.bps3.core.event.payment.event.api.*;
 import com.ing.asia.bps3.core.domain.payment.Payment;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -29,7 +29,7 @@ public class PaymentSaga {
 
     @SagaEventHandler(associationProperty = "paymentId")
     public void on(SourceAccountDebitedEvent sourceAccountDebitedEvent) {
-        commandGateway.send(new SendPaymentCommand(sourceAccountDebitedEvent.getPaymentId(),
+        commandGateway.send(new SendPaymentToBillerCommand(sourceAccountDebitedEvent.getPaymentId(),
                 sourceAccountDebitedEvent.getAccountId(), sourceAccountDebitedEvent.getBillerId(),
                 sourceAccountDebitedEvent.getAmount()));
     }
