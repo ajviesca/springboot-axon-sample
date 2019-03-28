@@ -22,7 +22,7 @@ import java.time.LocalDateTime
 
 @SpringBootTest(classes = [BpsTestConfiguration, PaymentRepositorySpecificationConfig])
 @ActiveProfiles("test")
-class PaymentRepositorySpecification extends Specification {
+class PaymentRepositorySpec extends Specification {
 
     @Autowired
     PaymentRepository paymentRepository;

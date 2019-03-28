@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = [PaymentController])
 @ActiveProfiles("test")
-class PaymentControllerSpecification extends Specification {
+class PaymentControllerSpec extends Specification {
 
     @Autowired
     MockMvc mockMvc

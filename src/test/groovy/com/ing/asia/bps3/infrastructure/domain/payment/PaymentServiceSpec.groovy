@@ -26,7 +26,7 @@ import java.time.LocalDateTime
 
 @SpringBootTest(classes = [BpsTestConfiguration, PaymentControllerSpecificationConfig])
 @ActiveProfiles("test")
-class PaymentServiceSpecification extends Specification {
+class PaymentServiceSpec extends Specification {
 
     @Autowired
     PaymentService paymentService;
