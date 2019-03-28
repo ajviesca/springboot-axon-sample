@@ -1,6 +1,6 @@
 package com.ing.asia.bps3.configuration;
 
-import com.ing.asia.bps3.core.axon.saga.payment.command.handler.*;
+import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler.*;
 import com.ing.asia.bps3.core.domain.account.AccountRepository;
 import com.ing.asia.bps3.core.domain.biller.BillerRepository;
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
@@ -27,13 +27,13 @@ public class CommandHandlerConfiguration {
     }
 
     @Bean
-    public PayBillHandler payBillHandler() {
-        return new PayBillHandler(eventBus, paymentRepository, billerRepository);
+    public PostPaymentHandler payBillHandler() {
+        return new PostPaymentHandler(eventBus, paymentRepository, billerRepository);
     }
 
     @Bean
-    public DebitSourceHandler debitSourceHandler() {
-        return new DebitSourceHandler(eventBus, accountRepository);
+    public DebitSourceAccountHandler debitSourceHandler() {
+        return new DebitSourceAccountHandler(eventBus, accountRepository);
     }
 
     @Bean
@@ -47,8 +47,8 @@ public class CommandHandlerConfiguration {
     }
 
     @Bean
-    public EndPaymentHandler paymentHandler() {
-        return new EndPaymentHandler(eventBus, paymentRepository);
+    public UpdatePaymentStatusHandler paymentHandler() {
+        return new UpdatePaymentStatusHandler(eventBus, paymentRepository);
     }
 
 }

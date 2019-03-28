@@ -1,7 +1,7 @@
 package com.ing.asia.bps3.presentation.payment;
 
-import com.ing.asia.bps3.core.axon.saga.payment.command.api.PayBillCommand;
-import com.ing.asia.bps3.core.axon.saga.payment.event.api.PaymentEndedEvent;
+import com.ing.asia.bps3.core.event.payment.command.api.PostPaymentCommand;
+import com.ing.asia.bps3.core.event.payment.event.api.PaymentEndedEvent;
 import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PostPaymentSave;
@@ -38,9 +38,9 @@ public class PaymentController {
     }
 
     @PostMapping("/post-payment-axon")
-    public DeferredResult<ResponseEntity<Payment>> postPaymentAxon(@RequestBody PayBillCommand payBillCommand) {
+    public DeferredResult<ResponseEntity<Payment>> postPaymentAxon(@RequestBody PostPaymentCommand postPaymentCommand) {
         deferredResult = new DeferredResult();
-        commandGateway.sendAndWait(payBillCommand);
+        commandGateway.sendAndWait(postPaymentCommand);
         return deferredResult;
     }
 
