@@ -22,6 +22,15 @@ public class Payment {
 
     }
 
+
+    public Payment(BigDecimal amount, Biller biller, LocalDateTime postDate, Status status, Long paidByAccountId) {
+        this.amount = amount;
+        this.biller = biller;
+        this.postDate = postDate;
+        this.status = status;
+        this.paidByAccountId = paidByAccountId;
+    }
+
     public Payment(Long id, BigDecimal amount, Biller biller, LocalDateTime postDate, Status status, Long paidByAccountId) {
         this.id = id;
         this.amount = amount;

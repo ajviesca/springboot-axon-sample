@@ -1,5 +1,6 @@
 package com.ing.asia.bps3.infrastructure.domain.payment
 
+import com.ing.asia.bps3.configuration.BpsTestConfiguration
 import com.ing.asia.bps3.configuration.JpaTestConfiguration
 import com.ing.asia.bps3.configuration.RepositoryTestConfiguration
 import com.ing.asia.bps3.configuration.ServiceTestConfiguration
@@ -16,13 +17,14 @@ import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.Primary
+import org.springframework.context.annotation.Profile
 import org.springframework.test.context.ActiveProfiles
 import spock.lang.Shared
 import spock.lang.Specification
 
 import java.time.LocalDateTime
 
-@SpringBootTest(classes = [PaymentControllerSpecificationConfig])
+@SpringBootTest(classes = [BpsTestConfiguration, PaymentControllerSpecificationConfig])
 @ActiveProfiles("test")
 class PaymentServiceSpecification extends Specification {
 
@@ -62,7 +64,7 @@ class PaymentServiceSpecification extends Specification {
     }
 
     @TestConfiguration
-    @Import([JpaTestConfiguration, RepositoryTestConfiguration, ServiceTestConfiguration])
+    @Profile("test")
     static class PaymentControllerSpecificationConfig {
 
         @Bean

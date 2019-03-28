@@ -41,8 +41,7 @@ public class PostPaymentExecutor {
     }
 
     private void createPaymentRecord() {
-        payment = new Payment(System.currentTimeMillis(),
-                paymentAmount, biller, LocalDateTime.now(), Payment.Status.PLACED, accountId);
+        payment = new Payment(paymentAmount, biller, LocalDateTime.now(), Payment.Status.PLACED, accountId);
     }
 
     private void savePaymentRecord() {

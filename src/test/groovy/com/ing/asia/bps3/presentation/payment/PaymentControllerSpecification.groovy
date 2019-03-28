@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
+import org.springframework.context.annotation.Profile
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Shared
@@ -64,6 +65,7 @@ class PaymentControllerSpecification extends Specification {
 
     @TestConfiguration
     @Import([ServiceTestConfiguration])
+    @Profile("test")
     static class PaymentControllerSpecificationConfig {
         DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
 

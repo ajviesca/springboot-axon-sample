@@ -33,7 +33,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     public Payment save(Payment payment) {
         Biller sourceBiller = payment.getBiller();
         BillerEntity billerEntity = new BillerEntity(sourceBiller.getId(), sourceBiller.getBillerName());
-        PaymentEntity paymentEntity = new PaymentEntity(payment.getId(), payment.getAmount(), billerEntity,
+        PaymentEntity paymentEntity = new PaymentEntity(System.currentTimeMillis(), payment.getAmount(), billerEntity,
                 payment.getPostDate(), payment.getStatus(), payment.getPaidByAccountId());
         PaymentEntity saved = paymentJPA.save(paymentEntity);
         billerEntity = saved.getBiller();
@@ -49,5 +49,21 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         return new Payment(paymentEntity.getId(), paymentEntity.getAmount(),
                 new Biller(billerEntity.getId(), billerEntity.getBillerName()), paymentEntity.getPostDate(),
                 paymentEntity.getStatus(), paymentEntity.getPaidByAccountId());
+    }
+
+    @Override
+    public Payment update(Payment payment) {
+        PaymentEntity paymentEntity = paymentJPA.findById(payment.getId()).get();
+        paymentEntity.setAmount(payment.getAmount());
+        paymentEntity.setStatus(payment.getStatus());
+        paymentEntity.setPostDate(payment.getPostDate());
+        Biller biller = payment.getBiller();
+        paymentEntity.setBiller(new BillerEntity(biller.getId(), biller.getBillerName()));
+        paymentEntity.setPaidByAccountId(payment.getPaidByAccountId());
+        PaymentEntity saved = paymentJPA.save(paymentEntity);
+        BillerEntity billerEntity = saved.getBiller();
+        return new Payment(saved.getId(), saved.getAmount(),
+                new Biller(billerEntity.getId(), billerEntity.getBillerName()),
+                saved.getPostDate(), saved.getStatus(), saved.getPaidByAccountId());
     }
 }

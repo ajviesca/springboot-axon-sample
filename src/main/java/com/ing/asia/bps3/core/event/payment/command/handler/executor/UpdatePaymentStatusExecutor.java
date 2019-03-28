@@ -33,20 +33,22 @@ public class UpdatePaymentStatusExecutor {
         return createPaymentEndedEvent();
     }
 
-    private PaymentEndedEvent createPaymentEndedEvent() {
-        return new PaymentEndedEvent(paymentId, accountId, billerId,
-                paymentAmount);
-    }
-
-    private void updatePaymentRecord() {
-        paymentRepository.save(payment);
+    private void getPaymentRecord() {
+        payment = paymentRepository.findById(paymentId);
     }
 
     private void updatePaymentStatus() {
         payment.setStatus(paymentStatus);
     }
 
-    private void getPaymentRecord() {
-        payment = paymentRepository.findById(paymentId);
+
+    private void updatePaymentRecord() {
+        payment = paymentRepository.update(payment);
     }
+
+    private PaymentEndedEvent createPaymentEndedEvent() {
+        return new PaymentEndedEvent(paymentId, accountId, billerId,
+                paymentAmount);
+    }
+
 }
