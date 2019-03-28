@@ -5,6 +5,7 @@ import com.ing.asia.bps3.core.domain.biller.Biller
 import com.ing.asia.bps3.core.domain.payment.Payment
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository
 import com.ing.asia.bps3.core.event.payment.command.api.UpdatePaymentStatusCommand
+import com.ing.asia.bps3.core.event.payment.event.api.PaymentEndedEvent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
@@ -33,26 +34,32 @@ class UpdatePaymentStatusExecutorSpecification extends Specification {
     @Shared
     Biller meralcoBiller = new Biller(1L, "Meralco")
 
-
     @Unroll
     def 'should update Payment status to #arg'() {
         given:
-        def updatePaymentStatusCommand = new UpdatePaymentStatusCommand(paymentId, accountId, billerId, 100L, arg)
+        def updatePaymentStatusCommand = new UpdatePaymentStatusCommand(paymentId, accountId, billerId, 100, arg)
 
         and:
         def updatePaymentStatusExecutor = new UpdatePaymentStatusExecutor(paymentRepository, updatePaymentStatusCommand)
 
         and:
-        paymentRepository.findById(paymentId) >> new Payment(paymentId, 100L, meralcoBiller, LocalDateTime.now(), arg, accountId)
+        paymentRepository.findById(paymentId) >> new Payment(paymentId, 100, meralcoBiller, LocalDateTime.now(), arg, accountId)
 
         and:
-        paymentRepository.update(_) >> new Payment(paymentId, 100L, meralcoBiller, LocalDateTime.now(), expected, accountId)
+        paymentRepository.update(_) >> new Payment(paymentId, 100, meralcoBiller, LocalDateTime.now(), expected, accountId)
 
         when:
-        updatePaymentStatusExecutor.execute();
+        def resultEvent = updatePaymentStatusExecutor.execute()
 
         then:
-        updatePaymentStatusExecutor.payment.status.equals(expected)
+        verifyAll {
+            updatePaymentStatusExecutor.payment.status.equals(expected)
+            resultEvent instanceof PaymentEndedEvent
+            resultEvent.paymentId == paymentId
+            resultEvent.accountId == accountId;
+            resultEvent.billerId == billerId
+            resultEvent.amount.compareTo(100) == 0
+        }
 
         where:
         arg                                        || expected

@@ -42,6 +42,10 @@ dependencies {
             'com.h2database:h2'
     )
 
+    testRuntime (
+            'com.h2database:h2'
+    )
+
     annotationProcessor (
             'org.projectlombok:lombok'
     )
