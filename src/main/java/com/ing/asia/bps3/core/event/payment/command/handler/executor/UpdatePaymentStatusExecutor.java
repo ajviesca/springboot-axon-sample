@@ -2,6 +2,7 @@ package com.ing.asia.bps3.core.event.payment.command.handler.executor;
 
 import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
+import com.ing.asia.bps3.core.domain.payment.PaymentStatus;
 import com.ing.asia.bps3.core.event.payment.command.api.UpdatePaymentStatusCommand;
 import com.ing.asia.bps3.core.event.payment.event.api.PaymentEndedEvent;
 
@@ -11,7 +12,7 @@ public class UpdatePaymentStatusExecutor {
 
     private PaymentRepository paymentRepository;
     private Long paymentId;
-    private Payment.Status paymentStatus;
+    private PaymentStatus paymentStatus;
     private Long accountId;
     private Long billerId;
     private BigDecimal paymentAmount;

@@ -4,9 +4,10 @@ import com.ing.asia.bps3.configuration.BpsTestConfiguration
 import com.ing.asia.bps3.core.domain.biller.Biller
 import com.ing.asia.bps3.core.domain.payment.Payment
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository
+import com.ing.asia.bps3.core.domain.payment.PaymentStatus
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntity
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntity
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA
+import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntityJPA
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentRepositoryImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -28,7 +29,7 @@ class PaymentRepositorySpec extends Specification {
     PaymentRepository paymentRepository;
 
     @Autowired
-    PaymentJPA paymentJPA;
+    PaymentEntityJPA paymentJPA;
 
     @Shared
     Biller meralcoBiller = new Biller(1L, "Meralco")
@@ -38,7 +39,7 @@ class PaymentRepositorySpec extends Specification {
 
     def "should save"() {
         given:
-        Payment payment = new Payment(100, meralcoBiller, LocalDateTime.now(), Payment.Status.PLACED, 1L)
+        Payment payment = new Payment(100, meralcoBiller, LocalDateTime.now(), PaymentStatus.PLACED, 1L)
 
         and:
         PaymentEntity paymentEntity = new PaymentEntity(System.currentTimeMillis(), payment.getAmount(), meralcoBillerEntity,
@@ -54,7 +55,7 @@ class PaymentRepositorySpec extends Specification {
         resultPayment != null
         resultPayment.getId() != null
         resultPayment.biller.id == meralcoBiller.id
-        resultPayment.status == Payment.Status.PLACED
+        resultPayment.status == PaymentStatus.PLACED
     }
 
     @TestConfiguration
@@ -63,7 +64,7 @@ class PaymentRepositorySpec extends Specification {
 
         @Bean
         @Primary
-        PaymentRepository overrideDefaultPaymentRepository(PaymentJPA paymentJPA) {
+        PaymentRepository overrideDefaultPaymentRepository(PaymentEntityJPA paymentJPA) {
             return new PaymentRepositoryImpl(paymentJPA)
         }
     }

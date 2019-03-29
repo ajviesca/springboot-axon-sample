@@ -1,11 +1,11 @@
 package com.ing.asia.bps3.infrastrcuture.axon.saga.payment;
 
+import com.ing.asia.bps3.core.domain.payment.PaymentStatus;
 import com.ing.asia.bps3.core.event.payment.command.api.DebitSourceAccountCommand;
-import com.ing.asia.bps3.core.event.payment.command.api.UpdatePaymentStatusCommand;
 import com.ing.asia.bps3.core.event.payment.command.api.ReversePaymentCommand;
 import com.ing.asia.bps3.core.event.payment.command.api.SendPaymentToBillerCommand;
+import com.ing.asia.bps3.core.event.payment.command.api.UpdatePaymentStatusCommand;
 import com.ing.asia.bps3.core.event.payment.event.api.*;
-import com.ing.asia.bps3.core.domain.payment.Payment;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.modelling.saga.EndSaga;
 import org.axonframework.modelling.saga.SagaEventHandler;
@@ -39,7 +39,7 @@ public class PaymentSaga {
     public void on(PaymentSuccessfulEvent paymentSuccessfulEvent) {
         commandGateway.send(new UpdatePaymentStatusCommand(paymentSuccessfulEvent.getPaymentId(),
                 paymentSuccessfulEvent.getAccountId(), paymentSuccessfulEvent.getBillerId(),
-                paymentSuccessfulEvent.getAmount(), Payment.Status.COMPLETED));
+                paymentSuccessfulEvent.getAmount(), PaymentStatus.COMPLETED));
     }
 
     @SagaEventHandler(associationProperty = "paymentId")
@@ -53,7 +53,7 @@ public class PaymentSaga {
     public void on(SourceAccountInsufficientBalanceEvent sourceAccountInsufficientBalanceEvent) {
         commandGateway.send(new UpdatePaymentStatusCommand(sourceAccountInsufficientBalanceEvent.getPaymentId(),
                 sourceAccountInsufficientBalanceEvent.getAccountId(), sourceAccountInsufficientBalanceEvent.getBillerId(),
-                sourceAccountInsufficientBalanceEvent.getAmount(), Payment.Status.FAILED_INSUFFICIENT_BALANCE));
+                sourceAccountInsufficientBalanceEvent.getAmount(), PaymentStatus.FAILED_INSUFFICIENT_BALANCE));
     }
 
     @EndSaga
@@ -61,6 +61,6 @@ public class PaymentSaga {
     public void on(PaymentReversedEvent paymentReversedEvent) {
         commandGateway.send(new UpdatePaymentStatusCommand(paymentReversedEvent.getPaymentId(),
                 paymentReversedEvent.getAccountId(), paymentReversedEvent.getBillerId(),
-                paymentReversedEvent.getAmount(), Payment.Status.FAILED_AND_REVERSED));
+                paymentReversedEvent.getAmount(), PaymentStatus.FAILED_AND_REVERSED));
     }
 }

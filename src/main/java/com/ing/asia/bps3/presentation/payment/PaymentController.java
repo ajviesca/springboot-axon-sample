@@ -1,8 +1,8 @@
 package com.ing.asia.bps3.presentation.payment;
 
+import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.core.event.payment.command.api.PostPaymentCommand;
 import com.ing.asia.bps3.core.event.payment.event.api.PaymentEndedEvent;
-import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PostPaymentSave;
 import org.axonframework.commandhandling.gateway.CommandGateway;

@@ -1,6 +1,6 @@
 package com.ing.asia.bps3.infrastrcuture.domain.payment;
 
-import com.ing.asia.bps3.core.domain.payment.Payment;
+import com.ing.asia.bps3.core.domain.payment.PaymentStatus;
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntity;
 
 import javax.persistence.*;
@@ -22,14 +22,14 @@ public class PaymentEntity {
     private LocalDateTime postDate;
 
     @Enumerated(EnumType.STRING)
-    private Payment.Status status;
+    private PaymentStatus status;
 
     private Long paidByAccountId;
 
     public PaymentEntity() {
     }
 
-    public PaymentEntity(Long id, BigDecimal amount, BillerEntity biller, LocalDateTime postDate, Payment.Status status, Long paidByAccountId) {
+    public PaymentEntity(Long id, BigDecimal amount, BillerEntity biller, LocalDateTime postDate, PaymentStatus status, Long paidByAccountId) {
         this.id = id;
         this.amount = amount;
         this.biller = biller;
@@ -70,11 +70,11 @@ public class PaymentEntity {
         this.postDate = postDate;
     }
 
-    public Payment.Status getStatus() {
+    public PaymentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Payment.Status status) {
+    public void setStatus(PaymentStatus status) {
         this.status = status;
     }
 

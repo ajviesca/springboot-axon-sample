@@ -4,6 +4,7 @@ package com.ing.asia.bps3.presentation.payment
 import com.ing.asia.bps3.configuration.ServiceTestConfiguration
 import com.ing.asia.bps3.core.domain.biller.Biller
 import com.ing.asia.bps3.core.domain.payment.Payment
+import com.ing.asia.bps3.core.domain.payment.PaymentStatus
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService
 import groovy.json.JsonSlurper
 import org.axonframework.commandhandling.gateway.CommandGateway
@@ -41,7 +42,7 @@ class PaymentControllerSpec extends Specification {
         given:
         LocalDateTime postedDate = LocalDateTime.now();
         List<Payment> payments = [
-                new Payment(1L, new BigDecimal(1000), meralcoBiller, postedDate, Payment.Status.COMPLETED,
+                new Payment(1L, new BigDecimal(1000), meralcoBiller, postedDate, PaymentStatus.COMPLETED,
                         1L)
         ]
 

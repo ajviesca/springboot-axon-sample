@@ -4,6 +4,7 @@ import com.ing.asia.bps3.configuration.BpsTestConfiguration
 import com.ing.asia.bps3.core.domain.biller.Biller
 import com.ing.asia.bps3.core.domain.payment.Payment
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository
+import com.ing.asia.bps3.core.domain.payment.PaymentStatus
 import com.ing.asia.bps3.core.event.payment.command.api.UpdatePaymentStatusCommand
 import com.ing.asia.bps3.core.event.payment.event.api.PaymentEndedEvent
 import org.springframework.beans.factory.annotation.Autowired
@@ -62,10 +63,10 @@ class UpdatePaymentStatusExecutorSpec extends Specification {
         }
 
         where:
-        arg                                        || expected
-        Payment.Status.COMPLETED                   || Payment.Status.COMPLETED
-        Payment.Status.FAILED_AND_REVERSED         || Payment.Status.FAILED_AND_REVERSED
-        Payment.Status.FAILED_INSUFFICIENT_BALANCE || Payment.Status.FAILED_INSUFFICIENT_BALANCE
+        arg                                       || expected
+        PaymentStatus.COMPLETED                   || PaymentStatus.COMPLETED
+        PaymentStatus.FAILED_AND_REVERSED         || PaymentStatus.FAILED_AND_REVERSED
+        PaymentStatus.FAILED_INSUFFICIENT_BALANCE || PaymentStatus.FAILED_INSUFFICIENT_BALANCE
 
     }
 }

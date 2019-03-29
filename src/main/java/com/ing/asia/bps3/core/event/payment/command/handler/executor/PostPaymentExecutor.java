@@ -4,6 +4,7 @@ import com.ing.asia.bps3.core.domain.biller.Biller;
 import com.ing.asia.bps3.core.domain.biller.BillerRepository;
 import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
+import com.ing.asia.bps3.core.domain.payment.PaymentStatus;
 import com.ing.asia.bps3.core.event.payment.command.api.PostPaymentCommand;
 import com.ing.asia.bps3.core.event.payment.event.api.PaymentInProgressEvent;
 
@@ -41,7 +42,7 @@ public class PostPaymentExecutor {
     }
 
     private void createPaymentRecord() {
-        payment = new Payment(paymentAmount, biller, LocalDateTime.now(), Payment.Status.PLACED, accountId);
+        payment = new Payment(paymentAmount, biller, LocalDateTime.now(), PaymentStatus.PLACED, accountId);
     }
 
     private void savePaymentRecord() {

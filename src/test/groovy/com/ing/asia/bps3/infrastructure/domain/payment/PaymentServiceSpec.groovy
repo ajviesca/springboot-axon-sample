@@ -1,13 +1,11 @@
 package com.ing.asia.bps3.infrastructure.domain.payment
 
 import com.ing.asia.bps3.configuration.BpsTestConfiguration
-import com.ing.asia.bps3.configuration.JpaTestConfiguration
-import com.ing.asia.bps3.configuration.RepositoryTestConfiguration
-import com.ing.asia.bps3.configuration.ServiceTestConfiguration
 import com.ing.asia.bps3.core.domain.biller.Biller
 import com.ing.asia.bps3.core.domain.biller.BillerRepository
 import com.ing.asia.bps3.core.domain.payment.Payment
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository
+import com.ing.asia.bps3.core.domain.payment.PaymentStatus
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentServiceImpl
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PostPaymentSave
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.Primary
 import org.springframework.context.annotation.Profile
 import org.springframework.test.context.ActiveProfiles
@@ -51,7 +48,7 @@ class PaymentServiceSpec extends Specification {
         paymentRepository.save(_) >> new Payment(System.currentTimeMillis(),
                 paymentSave.getAmount(),
                 meralcoBiller,
-                LocalDateTime.now(), Payment.Status.PLACED, paymentSave.getAccountId())
+                LocalDateTime.now(), PaymentStatus.PLACED, paymentSave.getAccountId())
 
         when:
         Payment paymentResult = paymentService.postPayment(paymentSave);
@@ -60,7 +57,7 @@ class PaymentServiceSpec extends Specification {
         paymentResult.id != null;
         paymentResult.amount.compareTo(paymentSave.amount) == 0
         paymentResult.biller.id == paymentSave.billerId
-        paymentResult.status == Payment.Status.PLACED
+        paymentResult.status == PaymentStatus.PLACED
     }
 
     @TestConfiguration

@@ -1,9 +1,9 @@
 package com.ing.asia.bps3.configuration;
 
-import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler.*;
 import com.ing.asia.bps3.core.domain.account.AccountRepository;
 import com.ing.asia.bps3.core.domain.biller.BillerRepository;
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
+import com.ing.asia.bps3.infrastrcuture.axon.saga.payment.command.handler.*;
 import org.axonframework.eventhandling.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

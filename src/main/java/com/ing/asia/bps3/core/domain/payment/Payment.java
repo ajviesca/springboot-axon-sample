@@ -7,15 +7,11 @@ import java.time.LocalDateTime;
 
 public class Payment {
 
-    public enum Status {
-        PLACED, COMPLETED, FAILED_AND_REVERSED, FAILED_INSUFFICIENT_BALANCE
-    }
-
     private Long id;
     private BigDecimal amount;
     private Biller biller;
     private LocalDateTime postDate;
-    private Status status = Status.PLACED;
+    private PaymentStatus status = PaymentStatus.PLACED;
     private Long paidByAccountId;
 
     public Payment() {
@@ -23,7 +19,7 @@ public class Payment {
     }
 
 
-    public Payment(BigDecimal amount, Biller biller, LocalDateTime postDate, Status status, Long paidByAccountId) {
+    public Payment(BigDecimal amount, Biller biller, LocalDateTime postDate, PaymentStatus status, Long paidByAccountId) {
         this.amount = amount;
         this.biller = biller;
         this.postDate = postDate;
@@ -31,7 +27,7 @@ public class Payment {
         this.paidByAccountId = paidByAccountId;
     }
 
-    public Payment(Long id, BigDecimal amount, Biller biller, LocalDateTime postDate, Status status, Long paidByAccountId) {
+    public Payment(Long id, BigDecimal amount, Biller biller, LocalDateTime postDate, PaymentStatus status, Long paidByAccountId) {
         this.id = id;
         this.amount = amount;
         this.biller = biller;
@@ -72,11 +68,11 @@ public class Payment {
         this.postDate = postDate;
     }
 
-    public Status getStatus() {
+    public PaymentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(PaymentStatus status) {
         this.status = status;
     }
 

@@ -5,24 +5,24 @@ import com.ing.asia.bps3.core.domain.account.AccountRepository;
 
 public class AccountRepositoryImpl implements AccountRepository {
 
-    private final AccountJPA accountJPA;
+    private final AccountEntityJPA accountEntityJPA;
 
-    public AccountRepositoryImpl(AccountJPA accountJPA) {
-        this.accountJPA = accountJPA;
+    public AccountRepositoryImpl(AccountEntityJPA accountEntityJPA) {
+        this.accountEntityJPA = accountEntityJPA;
     }
 
     @Override
     public Account findById(Long id) {
-        AccountEntity accountEntity = accountJPA.findById(id).get();
+        AccountEntity accountEntity = accountEntityJPA.findById(id).get();
         return new Account(accountEntity.getId(), accountEntity.getName(), accountEntity.getBalance());
     }
 
     @Override
     public Account save(Account account) {
-        AccountEntity accountEntity = accountJPA.findById(account.getId()).get();
+        AccountEntity accountEntity = accountEntityJPA.findById(account.getId()).get();
         accountEntity.setBalance(account.getBalance());
         accountEntity.setName(account.getName());
-        AccountEntity saved = accountJPA.save(accountEntity);
+        AccountEntity saved = accountEntityJPA.save(accountEntity);
         return new Account(saved.getId(), saved.getName(), saved.getBalance());
     }
 }
