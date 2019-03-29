@@ -58,7 +58,6 @@ class PaymentEntityJpaSpec extends Specification {
         createPayments(5) || 5
     }
 
-
     List<PaymentEntity> createPayments(int numberOfPayments) {
         List<PaymentEntity> payments = new ArrayList<>();
 

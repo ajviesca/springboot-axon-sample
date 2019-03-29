@@ -68,6 +68,7 @@ class PaymentControllerSpec extends Specification {
     @Import([ServiceTestConfiguration])
     @Profile("test")
     static class PaymentControllerSpecificationConfig {
+
         DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
 
         @Bean
