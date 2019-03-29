@@ -31,31 +31,31 @@ class PaymentEntityJpaSpec extends Specification {
         entityManager.persist(new PaymentEntity(id: paymentId, amount: 100, postDate: LocalDateTime.now(),
                 status: PaymentStatus.PLACED))
 
-        when: "paymentEntityJPA.findById is called"
-        PaymentEntity payment = paymentJPA.findById(paymentId).get()
+        when: "payment retrieved by id"
+        Optional<PaymentEntity> payment = paymentJPA.findById(paymentId);
 
         then: "payment should not be null"
-        payment != null
+        payment.isPresent()
 
     }
 
     @Unroll
-    def "should retrieve #expectedRecordCount  records "() {
-        given: "list of payments persisted by entity manager"
+    def "should retrieve #expectedRecordCount records "() {
+        given: "#numberOfPayments payments persisted by entity manager"
         for (PaymentEntity payment : createPayments(numberOfPayments)) {
             entityManager.persist(payment);
         }
 
-        when: "paymentJPA.findAll is called"
+        when: "all payment records are retrieved"
         List<PaymentEntity> results = paymentJPA.findAll()
 
         then: "results.size should be #expectedRecordCount"
         results.size() == expectedRecordCount
 
         where:
-        numberOfPayments    ||  expectedRecordCount
-        1                   ||  1
-        5                   ||  5
+        numberOfPayments || expectedRecordCount
+        1                || 1
+        5                || 5
     }
 
     List<PaymentEntity> createPayments(int numberOfPayments) {
