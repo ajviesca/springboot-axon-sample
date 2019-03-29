@@ -44,7 +44,6 @@ public class DebitSourceAccountExecutor {
         return this;
     }
 
-
     public BasePaymentEvent getResultEvent() {
         return resultEvent;
     }
@@ -62,7 +61,7 @@ public class DebitSourceAccountExecutor {
     }
 
     private void updateAccountRecord() {
-        accountRepository.save(account);
+        account = accountRepository.save(account);
     }
 
     private boolean isInsufficientAccountBalance() {
