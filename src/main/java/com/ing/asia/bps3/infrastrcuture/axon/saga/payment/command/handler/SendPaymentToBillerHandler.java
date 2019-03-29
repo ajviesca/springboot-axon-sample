@@ -18,6 +18,6 @@ public class SendPaymentToBillerHandler extends BaseCommandHandler<SendPaymentTo
 
     @CommandHandler
     public void handle(SendPaymentToBillerCommand command) {
-        publish(new SendPaymentToBillerExecutor(billerRepository, command).execute());
+        publish(new SendPaymentToBillerExecutor(billerRepository, command).execute().getResultEvent());
     }
 }

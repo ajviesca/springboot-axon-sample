@@ -18,6 +18,6 @@ public class ReversePaymentHandler extends BaseCommandHandler<ReversePaymentComm
 
     @CommandHandler
     public void handle(ReversePaymentCommand command) {
-        publish(new ReversePaymentExecutor(accountRepository, command).execute());
+        publish(new ReversePaymentExecutor(accountRepository, command).execute().getResultEvent());
     }
 }

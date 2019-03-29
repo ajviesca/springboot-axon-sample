@@ -18,6 +18,7 @@ public class SendPaymentToBillerExecutor {
     private Long billerId;
 
     private Biller biller;
+    private BasePaymentEvent resultEvent;
 
     public SendPaymentToBillerExecutor(BillerRepository billerRepository, SendPaymentToBillerCommand command) {
         this.billerRepository = billerRepository;
@@ -27,14 +28,20 @@ public class SendPaymentToBillerExecutor {
         this.billerId = command.getBillerId();
     }
 
-    public BasePaymentEvent execute() {
+    public SendPaymentToBillerExecutor execute() {
         getBillerRecord();
 
         if (isPositivePaymentAmount()) {
-            return createPaymentSuccessfulEvent();
+            createPaymentSuccessfulEvent();
         } else {
-            return createPaymentFailedEvent();
+            createPaymentFailedEvent();
         }
+
+        return this;
+    }
+
+    public BasePaymentEvent getResultEvent() {
+        return resultEvent;
     }
 
     private void getBillerRecord() {
@@ -45,13 +52,13 @@ public class SendPaymentToBillerExecutor {
         return paymentAmount.compareTo(BigDecimal.ZERO) > 0;
     }
 
-    private PaymentSuccessfulEvent createPaymentSuccessfulEvent() {
-        return new PaymentSuccessfulEvent(paymentId, accountId, billerId,
+    private void createPaymentSuccessfulEvent() {
+        resultEvent = new PaymentSuccessfulEvent(paymentId, accountId, billerId,
                 paymentAmount);
     }
 
-    private PaymentFailedEvent createPaymentFailedEvent() {
-        return new PaymentFailedEvent(paymentId, accountId, billerId,
+    private void createPaymentFailedEvent() {
+        resultEvent = new PaymentFailedEvent(paymentId, accountId, billerId,
                 paymentAmount);
     }
 

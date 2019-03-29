@@ -18,6 +18,6 @@ public class DebitSourceAccountHandler extends BaseCommandHandler<DebitSourceAcc
 
     @CommandHandler
     public void handle(DebitSourceAccountCommand command) {
-        publish(new DebitSourceAccountExecutor(accountRepository, command).execute());
+        publish(new DebitSourceAccountExecutor(accountRepository, command).execute().getResultEvent());
     }
 }

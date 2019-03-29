@@ -4,7 +4,6 @@ import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.core.event.payment.command.api.PostPaymentCommand;
 import com.ing.asia.bps3.core.event.payment.event.api.PaymentEndedEvent;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService;
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PostPaymentSave;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +27,8 @@ public class PaymentController {
     }
 
     @PostMapping("/post-payment")
-    public ResponseEntity<Payment> postPayment(@RequestBody PostPaymentSave postPaymentSave) {
-        return ResponseEntity.ok(paymentService.postPayment(postPaymentSave));
+    public ResponseEntity<Payment> postPayment(@RequestBody PostPaymentCommand postPaymentCommand) {
+        return ResponseEntity.ok(paymentService.postPaymentV2(postPaymentCommand));
     }
 
     @GetMapping("/history")

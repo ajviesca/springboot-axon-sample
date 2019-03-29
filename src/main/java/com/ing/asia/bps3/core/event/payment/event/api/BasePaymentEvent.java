@@ -7,16 +7,16 @@ public class BasePaymentEvent {
     private Long paymentId;
     private Long accountId;
     private Long billerId;
-    private BigDecimal amount;
+    private BigDecimal paymentAmount;
 
     public BasePaymentEvent() {
     }
 
-    public BasePaymentEvent(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public BasePaymentEvent(Long paymentId, Long accountId, Long billerId, BigDecimal paymentAmount) {
         this.paymentId = paymentId;
         this.accountId = accountId;
         this.billerId = billerId;
-        this.amount = amount;
+        this.paymentAmount = paymentAmount;
     }
 
     public Long getPaymentId() {
@@ -43,11 +43,11 @@ public class BasePaymentEvent {
         this.billerId = billerId;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getPaymentAmount() {
+        return paymentAmount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setPaymentAmount(BigDecimal paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 }

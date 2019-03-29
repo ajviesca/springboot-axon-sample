@@ -50,7 +50,7 @@ class UpdatePaymentStatusExecutorSpec extends Specification {
         paymentRepository.update(_) >> new Payment(paymentId, 100, meralcoBiller, LocalDateTime.now(), expected, accountId)
 
         when:
-        def resultEvent = updatePaymentStatusExecutor.execute()
+        def resultEvent = updatePaymentStatusExecutor.execute().getResultEvent()
 
         then:
         verifyAll {
@@ -59,7 +59,7 @@ class UpdatePaymentStatusExecutorSpec extends Specification {
             resultEvent.paymentId == paymentId
             resultEvent.accountId == accountId;
             resultEvent.billerId == billerId
-            resultEvent.amount.compareTo(100) == 0
+            resultEvent.paymentAmount.compareTo(100) == 0
         }
 
         where:

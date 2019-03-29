@@ -17,6 +17,7 @@ public class UpdatePaymentStatusExecutor {
     private Long billerId;
     private BigDecimal paymentAmount;
     private Payment payment;
+    private PaymentEndedEvent resultEvent;
 
     public UpdatePaymentStatusExecutor(PaymentRepository paymentRepository, UpdatePaymentStatusCommand command) {
         this.paymentRepository = paymentRepository;
@@ -27,11 +28,16 @@ public class UpdatePaymentStatusExecutor {
         this.paymentAmount = command.getPaymentAmount();
     }
 
-    public PaymentEndedEvent execute() {
+    public UpdatePaymentStatusExecutor execute() {
         getPaymentRecord();
         updatePaymentStatus();
         updatePaymentRecord();
-        return createPaymentEndedEvent();
+        createPaymentEndedEvent();
+        return this;
+    }
+
+    public PaymentEndedEvent getResultEvent() {
+        return resultEvent;
     }
 
     private void getPaymentRecord() {
@@ -47,8 +53,8 @@ public class UpdatePaymentStatusExecutor {
         payment = paymentRepository.update(payment);
     }
 
-    private PaymentEndedEvent createPaymentEndedEvent() {
-        return new PaymentEndedEvent(paymentId, accountId, billerId,
+    private void createPaymentEndedEvent() {
+        resultEvent = new PaymentEndedEvent(paymentId, accountId, billerId,
                 paymentAmount);
     }
 

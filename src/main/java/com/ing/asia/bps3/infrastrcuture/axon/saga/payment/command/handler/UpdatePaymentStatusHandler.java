@@ -17,6 +17,6 @@ public class UpdatePaymentStatusHandler extends BaseCommandHandler<UpdatePayment
 
     @CommandHandler
     public void handle(UpdatePaymentStatusCommand command) {
-        publish(new UpdatePaymentStatusExecutor(paymentRepository, command).execute());
+        publish(new UpdatePaymentStatusExecutor(paymentRepository, command).execute().getResultEvent());
     }
 }

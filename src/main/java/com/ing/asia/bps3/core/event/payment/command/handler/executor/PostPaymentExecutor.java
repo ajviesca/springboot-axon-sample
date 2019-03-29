@@ -18,9 +18,9 @@ public class PostPaymentExecutor {
     private BigDecimal paymentAmount;
     private Long accountId;
     private Long billerId;
-
     private Payment payment;
     private Biller biller;
+    private PaymentInProgressEvent resultEvent;
 
     public PostPaymentExecutor(BillerRepository billerRepository, PaymentRepository paymentRepository, PostPaymentCommand command) {
         this.billerRepository = billerRepository;
@@ -30,11 +30,16 @@ public class PostPaymentExecutor {
         this.billerId = command.getBillerId();
     }
 
-    public PaymentInProgressEvent execute() {
+    public PostPaymentExecutor execute() {
         getBillerRecord();
         createPaymentRecord();
         savePaymentRecord();
-        return createPaymentInProgressevent();
+        createPaymentInProgressevent();
+        return this;
+    }
+
+    public PaymentInProgressEvent getResultEvent() {
+        return resultEvent;
     }
 
     private void getBillerRecord() {
@@ -49,8 +54,8 @@ public class PostPaymentExecutor {
         payment = paymentRepository.save(payment);
     }
 
-    private PaymentInProgressEvent createPaymentInProgressevent() {
-        return new PaymentInProgressEvent(payment.getId(), payment.getPaidByAccountId(),
+    private void createPaymentInProgressevent() {
+        resultEvent = new PaymentInProgressEvent(payment.getId(), payment.getPaidByAccountId(),
                 biller.getId(), payment.getAmount());
     }
 }

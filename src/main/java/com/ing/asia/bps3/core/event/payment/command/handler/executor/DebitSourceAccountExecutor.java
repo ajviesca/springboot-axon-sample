@@ -18,6 +18,7 @@ public class DebitSourceAccountExecutor {
     private BigDecimal paymentAmount;
     private Account account;
     private BigDecimal currentBalance;
+    private BasePaymentEvent resultEvent;
 
     public DebitSourceAccountExecutor(AccountRepository accountRepository,
                                       DebitSourceAccountCommand debitSourceAccountCommand) {
@@ -28,17 +29,24 @@ public class DebitSourceAccountExecutor {
         this.paymentAmount = debitSourceAccountCommand.getPaymentAmount();
     }
 
-    public BasePaymentEvent execute() {
+    public DebitSourceAccountExecutor execute() {
         getAccountRecord();
         getAccountCurrentBalance();
 
         if (isInsufficientAccountBalance()) {
-            return createInsufficientBalanceEvent();
+            createInsufficientBalanceEvent();
         } else {
             deductPaymentAmountFromCurrentBalance();
             updateAccountRecord();
-            return createAmountDebitedEvent();
+            createAmountDebitedEvent();
         }
+
+        return this;
+    }
+
+
+    public BasePaymentEvent getResultEvent() {
+        return resultEvent;
     }
 
     private void getAccountRecord() {
@@ -61,12 +69,12 @@ public class DebitSourceAccountExecutor {
         return currentBalance.compareTo(paymentAmount) < 0;
     }
 
-    private SourceAccountInsufficientBalanceEvent createInsufficientBalanceEvent() {
-        return new SourceAccountInsufficientBalanceEvent(paymentId, accountId, billerId, paymentAmount);
+    private void createInsufficientBalanceEvent() {
+        resultEvent = new SourceAccountInsufficientBalanceEvent(paymentId, accountId, billerId, paymentAmount);
     }
 
-    private SourceAccountDebitedEvent createAmountDebitedEvent() {
-        return new SourceAccountDebitedEvent(paymentId, accountId, billerId,
+    private void createAmountDebitedEvent() {
+        resultEvent = new SourceAccountDebitedEvent(paymentId, accountId, billerId,
                 paymentAmount);
     }
 }

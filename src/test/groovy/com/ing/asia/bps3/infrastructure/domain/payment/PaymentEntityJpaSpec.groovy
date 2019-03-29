@@ -42,7 +42,7 @@ class PaymentEntityJpaSpec extends Specification {
     @Unroll
     def "should retrieve #expectedRecordCount  records "() {
         given: "list of payments persisted by entity manager"
-        for (PaymentEntity payment : payments) {
+        for (PaymentEntity payment : createPayments(numberOfPayments)) {
             entityManager.persist(payment);
         }
 
@@ -53,9 +53,9 @@ class PaymentEntityJpaSpec extends Specification {
         results.size() == expectedRecordCount
 
         where:
-        payments          || expectedRecordCount
-        createPayments(1) || 1
-        createPayments(5) || 5
+        numberOfPayments    ||  expectedRecordCount
+        1                   ||  1
+        5                   ||  5
     }
 
     List<PaymentEntity> createPayments(int numberOfPayments) {

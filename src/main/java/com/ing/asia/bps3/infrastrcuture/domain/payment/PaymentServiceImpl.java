@@ -5,28 +5,37 @@ import com.ing.asia.bps3.core.domain.biller.BillerRepository;
 import com.ing.asia.bps3.core.domain.payment.Payment;
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
 import com.ing.asia.bps3.core.domain.payment.PaymentStatus;
+import com.ing.asia.bps3.core.domain.payment.PostPaymentFacade;
+import com.ing.asia.bps3.core.event.payment.command.api.PostPaymentCommand;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class PaymentServiceImpl implements PaymentService {
 
+    private final PostPaymentFacade postPaymentFacade;
     private final PaymentRepository paymentRepository;
     private final BillerRepository billerRepository;
 
-    public PaymentServiceImpl(PaymentRepository paymentRepository, BillerRepository billerRepository) {
+    public PaymentServiceImpl(PostPaymentFacade postPaymentFacade, PaymentRepository paymentRepository,
+                              BillerRepository billerRepository) {
+        this.postPaymentFacade = postPaymentFacade;
         this.paymentRepository = paymentRepository;
         this.billerRepository = billerRepository;
     }
 
-    // TODO: use payment commands/executor via facade pattern
     @Override
-    public Payment postPayment(PostPaymentSave postPaymentSave) {
-        Biller biller = billerRepository.findById(postPaymentSave.getBillerId());
-        Payment payment = new Payment(postPaymentSave.getAmount(),
+    public Payment postPayment(PostPaymentCommand postPaymentCommand) {
+        Biller biller = billerRepository.findById(postPaymentCommand.getBillerId());
+        Payment payment = new Payment(postPaymentCommand.getPaymentAmount(),
                 biller,
-                LocalDateTime.now(), PaymentStatus.PLACED, postPaymentSave.getAccountId());
+                LocalDateTime.now(), PaymentStatus.PLACED, postPaymentCommand.getAccountId());
         return paymentRepository.save(payment);
+    }
+
+    @Override
+    public Payment postPaymentV2(PostPaymentCommand postPaymentCommand) {
+        return postPaymentFacade.postPayment(postPaymentCommand);
     }
 
     @Override

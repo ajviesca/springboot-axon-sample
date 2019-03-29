@@ -16,6 +16,7 @@ public class ReversePaymentExecutor {
     private BigDecimal paymentAmount;
     private Account account;
     private BigDecimal accountBalance;
+    private PaymentReversedEvent resultEvent;
 
     public ReversePaymentExecutor(AccountRepository accountRepository, ReversePaymentCommand command) {
         this.accountRepository = accountRepository;
@@ -25,17 +26,22 @@ public class ReversePaymentExecutor {
         this.paymentAmount = command.getPaymentAmount();
     }
 
-    public PaymentReversedEvent execute() {
+    public ReversePaymentExecutor execute() {
         getAccountRecord();
         getAccountBalance();
         reversePaymentAmount();
         updateAccountRecord();
 
-        return createPaymentReversedEvent();
+        createPaymentReversedEvent();
+        return this;
     }
 
-    private PaymentReversedEvent createPaymentReversedEvent() {
-        return new PaymentReversedEvent(paymentId, accountId, billerId,
+    public PaymentReversedEvent getResultEvent() {
+        return resultEvent;
+    }
+
+    private void createPaymentReversedEvent() {
+        resultEvent = new PaymentReversedEvent(paymentId, accountId, billerId,
                 paymentAmount);
     }
 

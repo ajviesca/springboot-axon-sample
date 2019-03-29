@@ -1,5 +1,6 @@
 package com.ing.asia.bps3.configuration
 
+import com.ing.asia.bps3.core.domain.payment.PostPaymentFacade
 import com.ing.asia.bps3.infrastrcuture.domain.account.AccountService
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerService
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService
@@ -16,16 +17,21 @@ class ServiceTestConfiguration {
 
     @Bean
     AccountService accountService() {
-        detachedMockFactory.Stub(AccountService);
+        detachedMockFactory.Stub(AccountService)
     }
 
     @Bean
     BillerService billerService() {
-        detachedMockFactory.Stub(BillerService);
+        detachedMockFactory.Stub(BillerService)
     }
 
     @Bean
     PaymentService paymentService() {
-        detachedMockFactory.Stub(PaymentService);
+        detachedMockFactory.Stub(PaymentService)
+    }
+
+    @Bean
+    PostPaymentFacade postPaymentFacade() {
+        detachedMockFactory.Stub(PostPaymentFacade)
     }
 }

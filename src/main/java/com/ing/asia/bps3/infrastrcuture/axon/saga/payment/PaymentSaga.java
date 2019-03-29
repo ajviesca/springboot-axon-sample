@@ -24,14 +24,14 @@ public class PaymentSaga {
     public void on(PaymentInProgressEvent paymentInProgressEvent) {
         commandGateway.send(new DebitSourceAccountCommand(paymentInProgressEvent.getPaymentId(),
                 paymentInProgressEvent.getAccountId(), paymentInProgressEvent.getBillerId(),
-                paymentInProgressEvent.getAmount()));
+                paymentInProgressEvent.getPaymentAmount()));
     }
 
     @SagaEventHandler(associationProperty = "paymentId")
     public void on(SourceAccountDebitedEvent sourceAccountDebitedEvent) {
         commandGateway.send(new SendPaymentToBillerCommand(sourceAccountDebitedEvent.getPaymentId(),
                 sourceAccountDebitedEvent.getAccountId(), sourceAccountDebitedEvent.getBillerId(),
-                sourceAccountDebitedEvent.getAmount()));
+                sourceAccountDebitedEvent.getPaymentAmount()));
     }
 
     @EndSaga
@@ -39,21 +39,21 @@ public class PaymentSaga {
     public void on(PaymentSuccessfulEvent paymentSuccessfulEvent) {
         commandGateway.send(new UpdatePaymentStatusCommand(paymentSuccessfulEvent.getPaymentId(),
                 paymentSuccessfulEvent.getAccountId(), paymentSuccessfulEvent.getBillerId(),
-                paymentSuccessfulEvent.getAmount(), PaymentStatus.COMPLETED));
+                paymentSuccessfulEvent.getPaymentAmount(), PaymentStatus.COMPLETED));
     }
 
     @SagaEventHandler(associationProperty = "paymentId")
     public void on(PaymentFailedEvent paymentFailedEvent) {
         commandGateway.send(new ReversePaymentCommand(paymentFailedEvent.getPaymentId(),
                 paymentFailedEvent.getAccountId(), paymentFailedEvent.getBillerId(),
-                paymentFailedEvent.getAmount()));
+                paymentFailedEvent.getPaymentAmount()));
     }
 
     @SagaEventHandler(associationProperty = "paymentId")
     public void on(SourceAccountInsufficientBalanceEvent sourceAccountInsufficientBalanceEvent) {
         commandGateway.send(new UpdatePaymentStatusCommand(sourceAccountInsufficientBalanceEvent.getPaymentId(),
                 sourceAccountInsufficientBalanceEvent.getAccountId(), sourceAccountInsufficientBalanceEvent.getBillerId(),
-                sourceAccountInsufficientBalanceEvent.getAmount(), PaymentStatus.FAILED_INSUFFICIENT_BALANCE));
+                sourceAccountInsufficientBalanceEvent.getPaymentAmount(), PaymentStatus.FAILED_INSUFFICIENT_BALANCE));
     }
 
     @EndSaga
@@ -61,6 +61,6 @@ public class PaymentSaga {
     public void on(PaymentReversedEvent paymentReversedEvent) {
         commandGateway.send(new UpdatePaymentStatusCommand(paymentReversedEvent.getPaymentId(),
                 paymentReversedEvent.getAccountId(), paymentReversedEvent.getBillerId(),
-                paymentReversedEvent.getAmount(), PaymentStatus.FAILED_AND_REVERSED));
+                paymentReversedEvent.getPaymentAmount(), PaymentStatus.FAILED_AND_REVERSED));
     }
 }

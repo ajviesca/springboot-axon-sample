@@ -21,7 +21,7 @@ public class PostPaymentHandler extends BaseCommandHandler<PostPaymentCommand, P
 
     @CommandHandler
     public void handle(PostPaymentCommand command) {
-        publish(new PostPaymentExecutor(billerRepository, paymentRepository, command).execute());
+        publish(new PostPaymentExecutor(billerRepository, paymentRepository, command).execute().getResultEvent());
     }
 
 
