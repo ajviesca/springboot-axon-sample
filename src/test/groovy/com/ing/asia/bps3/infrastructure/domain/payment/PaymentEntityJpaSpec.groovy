@@ -16,23 +16,23 @@ import java.time.LocalDateTime
 class PaymentEntityJpaSpec extends Specification {
 
     @Autowired
-    TestEntityManager entityManager;
+    TestEntityManager entityManager
 
     @Autowired
-    PaymentJPA paymentJPA;
+    PaymentJPA paymentJPA
 
     def setup() {
-        paymentJPA.deleteAll();
+        paymentJPA.deleteAll()
     }
 
     def "should retrieve payment record"() {
         given: "data persisted by entity manager"
-        def paymentId = System.currentTimeMillis();
+        def paymentId = System.currentTimeMillis()
         entityManager.persist(new PaymentEntity(id: paymentId, amount: 100, postDate: LocalDateTime.now(),
                 status: PaymentStatus.PLACED))
 
         when: "payment retrieved by id"
-        Optional<PaymentEntity> payment = paymentJPA.findById(paymentId);
+        Optional<PaymentEntity> payment = paymentJPA.findById(paymentId)
 
         then: "payment should not be null"
         payment.isPresent()
@@ -43,7 +43,7 @@ class PaymentEntityJpaSpec extends Specification {
     def "should retrieve #expectedRecordCount records "() {
         given: "#numberOfPayments payments persisted by entity manager"
         for (PaymentEntity payment : createPayments(numberOfPayments)) {
-            entityManager.persist(payment);
+            entityManager.persist(payment)
         }
 
         when: "all payment records are retrieved"
@@ -59,7 +59,7 @@ class PaymentEntityJpaSpec extends Specification {
     }
 
     List<PaymentEntity> createPayments(int numberOfPayments) {
-        List<PaymentEntity> payments = new ArrayList<>();
+        List<PaymentEntity> payments = new ArrayList<>()
 
         for (int i = 0; i < numberOfPayments; i++) {
             payments.add(

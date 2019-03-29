@@ -12,7 +12,7 @@ import spock.mock.DetachedMockFactory
 @Profile("test")
 class RepositoryTestConfiguration {
 
-    DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
+    DetachedMockFactory detachedMockFactory = new DetachedMockFactory()
 
     @Bean
     PaymentRepository paymentRepository() {

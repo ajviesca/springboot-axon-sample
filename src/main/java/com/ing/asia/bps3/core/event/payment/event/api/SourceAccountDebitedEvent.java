@@ -7,7 +7,8 @@ public class SourceAccountDebitedEvent extends BasePaymentEvent {
     public SourceAccountDebitedEvent() {
     }
 
-    public SourceAccountDebitedEvent(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public SourceAccountDebitedEvent(Long paymentId, Long accountId, Long billerId,
+                                     BigDecimal amount) {
         super(paymentId, accountId, billerId, amount);
     }
 }

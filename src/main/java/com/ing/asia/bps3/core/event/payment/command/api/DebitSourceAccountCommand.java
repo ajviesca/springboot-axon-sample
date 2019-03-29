@@ -7,7 +7,8 @@ public class DebitSourceAccountCommand extends BasePaymentCommand {
     public DebitSourceAccountCommand() {
     }
 
-    public DebitSourceAccountCommand(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public DebitSourceAccountCommand(Long paymentId, Long accountId,
+                                     Long billerId, BigDecimal amount) {
         super(paymentId, accountId, billerId, amount);
     }
 }

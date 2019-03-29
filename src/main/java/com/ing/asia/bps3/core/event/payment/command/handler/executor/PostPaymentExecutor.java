@@ -22,7 +22,9 @@ public class PostPaymentExecutor {
     private Biller biller;
     private PaymentInProgressEvent resultEvent;
 
-    public PostPaymentExecutor(BillerRepository billerRepository, PaymentRepository paymentRepository, PostPaymentCommand command) {
+    public PostPaymentExecutor(BillerRepository billerRepository,
+                               PaymentRepository paymentRepository,
+                               PostPaymentCommand command) {
         this.billerRepository = billerRepository;
         this.paymentRepository = paymentRepository;
         this.paymentAmount = command.getPaymentAmount();
@@ -47,7 +49,8 @@ public class PostPaymentExecutor {
     }
 
     private void createPaymentRecord() {
-        payment = new Payment(paymentAmount, biller, LocalDateTime.now(), PaymentStatus.PLACED, accountId);
+        payment = new Payment(paymentAmount, biller, LocalDateTime.now(),
+                PaymentStatus.PLACED, accountId);
     }
 
     private void savePaymentRecord() {
@@ -55,7 +58,7 @@ public class PostPaymentExecutor {
     }
 
     private void createPaymentInProgressevent() {
-        resultEvent = new PaymentInProgressEvent(payment.getId(), payment.getPaidByAccountId(),
-                biller.getId(), payment.getAmount());
+        resultEvent = new PaymentInProgressEvent(payment.getId(),
+                payment.getPaidByAccountId(), biller.getId(), payment.getAmount());
     }
 }

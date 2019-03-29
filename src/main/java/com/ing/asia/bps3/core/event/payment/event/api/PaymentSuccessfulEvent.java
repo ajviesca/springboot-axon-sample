@@ -7,7 +7,8 @@ public class PaymentSuccessfulEvent extends BasePaymentEvent {
     public PaymentSuccessfulEvent() {
     }
 
-    public PaymentSuccessfulEvent(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public PaymentSuccessfulEvent(Long paymentId, Long accountId, Long billerId,
+                                  BigDecimal amount) {
         super(paymentId, accountId, billerId, amount);
     }
 }

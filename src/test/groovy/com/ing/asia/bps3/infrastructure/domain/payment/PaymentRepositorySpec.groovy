@@ -26,10 +26,10 @@ import java.time.LocalDateTime
 class PaymentRepositorySpec extends Specification {
 
     @Autowired
-    PaymentRepository paymentRepository;
+    PaymentRepository paymentRepository
 
     @Autowired
-    PaymentJPA paymentJPA;
+    PaymentJPA paymentJPA
 
     @Shared
     Biller meralcoBiller = new Biller(1L, "Meralco")

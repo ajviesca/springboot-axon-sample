@@ -40,14 +40,14 @@ class PaymentControllerSpec extends Specification {
 
     def "should return payment history"() {
         given:
-        LocalDateTime postedDate = LocalDateTime.now();
+        LocalDateTime postedDate = LocalDateTime.now()
         List<Payment> payments = [
                 new Payment(1L, new BigDecimal(1000), meralcoBiller, postedDate, PaymentStatus.COMPLETED,
                         1L)
         ]
 
         and:
-        paymentService.getPaymentHistory() >> payments;
+        paymentService.getPaymentHistory() >> payments
 
         when:
         def result = mockMvc.perform(get("/payment/history"))
@@ -69,7 +69,7 @@ class PaymentControllerSpec extends Specification {
     @Profile("test")
     static class PaymentControllerSpecificationConfig {
 
-        DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
+        DetachedMockFactory detachedMockFactory = new DetachedMockFactory()
 
         @Bean
         CommandGateway commandGateway() {

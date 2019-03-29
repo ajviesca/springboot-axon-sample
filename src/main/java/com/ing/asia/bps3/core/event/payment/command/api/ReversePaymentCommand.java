@@ -7,7 +7,8 @@ public class ReversePaymentCommand extends BasePaymentCommand {
     public ReversePaymentCommand() {
     }
 
-    public ReversePaymentCommand(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public ReversePaymentCommand(Long paymentId, Long accountId, Long billerId,
+                                 BigDecimal amount) {
         super(paymentId, accountId, billerId, amount);
     }
 }

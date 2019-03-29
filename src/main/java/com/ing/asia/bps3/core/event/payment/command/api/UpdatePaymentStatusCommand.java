@@ -11,7 +11,8 @@ public class UpdatePaymentStatusCommand extends BasePaymentCommand {
     public UpdatePaymentStatusCommand() {
     }
 
-    public UpdatePaymentStatusCommand(Long paymentId, Long accountId, Long billerId, BigDecimal amount, PaymentStatus paymentStatus) {
+    public UpdatePaymentStatusCommand(Long paymentId, Long accountId, Long billerId,
+                                      BigDecimal amount, PaymentStatus paymentStatus) {
         super(paymentId, accountId, billerId, amount);
         this.paymentStatus = paymentStatus;
     }

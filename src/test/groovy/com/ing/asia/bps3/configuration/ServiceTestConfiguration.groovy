@@ -13,7 +13,7 @@ import spock.mock.DetachedMockFactory
 @Profile("test")
 class ServiceTestConfiguration {
 
-    DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
+    DetachedMockFactory detachedMockFactory = new DetachedMockFactory()
 
     @Bean
     AccountService accountService() {

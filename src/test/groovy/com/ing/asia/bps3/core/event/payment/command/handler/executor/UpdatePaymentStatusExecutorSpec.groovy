@@ -21,7 +21,7 @@ import java.time.LocalDateTime
 class UpdatePaymentStatusExecutorSpec extends Specification {
 
     @Autowired
-    PaymentRepository paymentRepository;
+    PaymentRepository paymentRepository
 
     @Shared
     def paymentId = 1L
@@ -57,7 +57,7 @@ class UpdatePaymentStatusExecutorSpec extends Specification {
             updatePaymentStatusExecutor.payment.status.equals(expected)
             resultEvent instanceof PaymentEndedEvent
             resultEvent.paymentId == paymentId
-            resultEvent.accountId == accountId;
+            resultEvent.accountId == accountId
             resultEvent.billerId == billerId
             resultEvent.paymentAmount.compareTo(100) == 0
         }

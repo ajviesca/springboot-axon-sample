@@ -14,7 +14,7 @@ import spock.mock.DetachedMockFactory
 @Profile("test")
 @EnableAutoConfiguration(exclude = [DataSourceAutoConfiguration])
 class JpaTestConfiguration {
-    DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
+    DetachedMockFactory detachedMockFactory = new DetachedMockFactory()
 
     @Bean
     BillerJPA billerEntityJPA() {

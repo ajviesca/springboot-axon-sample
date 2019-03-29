@@ -70,7 +70,8 @@ public class DebitSourceAccountExecutor {
     }
 
     private void createInsufficientBalanceEvent() {
-        resultEvent = new SourceAccountInsufficientBalanceEvent(paymentId, accountId, billerId, paymentAmount);
+        resultEvent = new SourceAccountInsufficientBalanceEvent(paymentId, accountId,
+                billerId, paymentAmount);
     }
 
     private void createAmountDebitedEvent() {

@@ -22,7 +22,8 @@ public class ServiceConfiguration {
     private final PaymentRepository paymentRepository;
     private final AccountRepository accountRepository;
 
-    public ServiceConfiguration(BillerRepository billerRepository, PaymentRepository paymentRepository,
+    public ServiceConfiguration(BillerRepository billerRepository,
+                                PaymentRepository paymentRepository,
                                 AccountRepository accountRepository) {
         this.billerRepository = billerRepository;
         this.paymentRepository = paymentRepository;
@@ -36,7 +37,8 @@ public class ServiceConfiguration {
 
     @Bean
     public PaymentService paymentService() {
-        return new PaymentServiceImpl(postPaymentFacade(), paymentRepository, billerRepository);
+        return new PaymentServiceImpl(postPaymentFacade(), paymentRepository,
+                billerRepository);
     }
 
     @Bean
@@ -46,6 +48,7 @@ public class ServiceConfiguration {
 
     @Bean
     public PostPaymentFacade postPaymentFacade() {
-        return new PostPaymentFacade(billerRepository, paymentRepository, accountRepository);
+        return new PostPaymentFacade(billerRepository, paymentRepository,
+                accountRepository);
     }
 }

@@ -7,7 +7,8 @@ public class SourceAccountInsufficientBalanceEvent extends BasePaymentEvent {
     public SourceAccountInsufficientBalanceEvent() {
     }
 
-    public SourceAccountInsufficientBalanceEvent(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public SourceAccountInsufficientBalanceEvent(Long paymentId, Long accountId,
+                                                 Long billerId, BigDecimal amount) {
         super(paymentId, accountId, billerId, amount);
     }
 }

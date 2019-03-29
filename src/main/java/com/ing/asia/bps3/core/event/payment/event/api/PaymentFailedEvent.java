@@ -7,7 +7,8 @@ public class PaymentFailedEvent extends BasePaymentEvent {
     public PaymentFailedEvent() {
     }
 
-    public PaymentFailedEvent(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public PaymentFailedEvent(Long paymentId, Long accountId, Long billerId,
+                              BigDecimal amount) {
         super(paymentId, accountId, billerId, amount);
     }
 }

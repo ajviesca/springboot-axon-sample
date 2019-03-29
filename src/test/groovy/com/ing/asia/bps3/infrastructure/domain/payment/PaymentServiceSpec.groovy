@@ -27,13 +27,13 @@ import java.time.LocalDateTime
 class PaymentServiceSpec extends Specification {
 
     @Autowired
-    PaymentService paymentService;
+    PaymentService paymentService
 
     @Autowired
-    PaymentRepository paymentRepository;
+    PaymentRepository paymentRepository
 
     @Autowired
-    BillerRepository billerRepository;
+    BillerRepository billerRepository
 
     @Shared
     Biller meralcoBiller = new Biller(1L, "Meralco")
@@ -52,10 +52,10 @@ class PaymentServiceSpec extends Specification {
                 LocalDateTime.now(), PaymentStatus.PLACED, paymentSave.getAccountId())
 
         when:
-        Payment paymentResult = paymentService.postPayment(paymentSave);
+        Payment paymentResult = paymentService.postPayment(paymentSave)
 
         then:
-        paymentResult.id != null;
+        paymentResult.id != null
         paymentResult.amount.compareTo(paymentSave.getPaymentAmount()) == 0
         paymentResult.biller.id == paymentSave.billerId
         paymentResult.status == PaymentStatus.PLACED

@@ -12,7 +12,8 @@ public class BasePaymentCommand {
     public BasePaymentCommand() {
     }
 
-    public BasePaymentCommand(Long paymentId, Long accountId, Long billerId, BigDecimal paymentAmount) {
+    public BasePaymentCommand(Long paymentId, Long accountId, Long billerId,
+                              BigDecimal paymentAmount) {
         this.paymentId = paymentId;
         this.accountId = accountId;
         this.billerId = billerId;

@@ -6,14 +6,14 @@ import org.axonframework.eventhandling.EventBus;
 import org.axonframework.eventhandling.GenericEventMessage;
 
 public abstract class BaseCommandHandler<PAYMENT_COMMAND extends BasePaymentCommand,
-        PaAYMENT_EVENT extends BasePaymentEvent> {
+        PAYMENT_EVENT extends BasePaymentEvent> {
     private final EventBus eventBus;
 
     public BaseCommandHandler(EventBus eventBus) {
         this.eventBus = eventBus;
     }
 
-    protected void publish(PaAYMENT_EVENT payload) {
+    protected void publish(PAYMENT_EVENT payload) {
         eventBus.publish(new GenericEventMessage<>(payload));
     }
 

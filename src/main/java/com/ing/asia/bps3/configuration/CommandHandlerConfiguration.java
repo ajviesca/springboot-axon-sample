@@ -19,7 +19,8 @@ public class CommandHandlerConfiguration {
     private final AccountRepository accountRepository;
 
     public CommandHandlerConfiguration(EventBus eventBus, PaymentRepository paymentRepository,
-                                       BillerRepository billerRepository, AccountRepository accountRepository) {
+                                       BillerRepository billerRepository,
+                                       AccountRepository accountRepository) {
         this.eventBus = eventBus;
         this.paymentRepository = paymentRepository;
         this.billerRepository = billerRepository;
@@ -38,7 +39,7 @@ public class CommandHandlerConfiguration {
 
     @Bean
     public SendPaymentToBillerHandler sendPaymentHandler() {
-        return new SendPaymentToBillerHandler(eventBus, billerRepository);
+        return new SendPaymentToBillerHandler(eventBus);
     }
 
     @Bean

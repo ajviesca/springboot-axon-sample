@@ -21,7 +21,8 @@ public class RepositoryConfiguration {
     private final BillerJPA billerJPA;
     private final AccountJPA accountJPA;
 
-    public RepositoryConfiguration(PaymentJPA paymentJPA, BillerJPA billerJPA, AccountJPA accountJPA) {
+    public RepositoryConfiguration(PaymentJPA paymentJPA, BillerJPA billerJPA,
+                                   AccountJPA accountJPA) {
         this.paymentJPA = paymentJPA;
         this.billerJPA = billerJPA;
         this.accountJPA = accountJPA;

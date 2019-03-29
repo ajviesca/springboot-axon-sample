@@ -12,7 +12,8 @@ public class BasePaymentEvent {
     public BasePaymentEvent() {
     }
 
-    public BasePaymentEvent(Long paymentId, Long accountId, Long billerId, BigDecimal paymentAmount) {
+    public BasePaymentEvent(Long paymentId, Long accountId, Long billerId,
+                            BigDecimal paymentAmount) {
         this.paymentId = paymentId;
         this.accountId = accountId;
         this.billerId = billerId;

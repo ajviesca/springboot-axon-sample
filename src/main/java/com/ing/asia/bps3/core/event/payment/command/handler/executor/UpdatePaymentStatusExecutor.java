@@ -19,7 +19,8 @@ public class UpdatePaymentStatusExecutor {
     private Payment payment;
     private PaymentEndedEvent resultEvent;
 
-    public UpdatePaymentStatusExecutor(PaymentRepository paymentRepository, UpdatePaymentStatusCommand command) {
+    public UpdatePaymentStatusExecutor(PaymentRepository paymentRepository,
+                                       UpdatePaymentStatusCommand command) {
         this.paymentRepository = paymentRepository;
         this.paymentId = command.getPaymentId();
         this.paymentStatus = command.getPaymentStatus();

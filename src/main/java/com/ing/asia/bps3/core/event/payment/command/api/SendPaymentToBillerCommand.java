@@ -7,7 +7,8 @@ public class SendPaymentToBillerCommand extends BasePaymentCommand {
     public SendPaymentToBillerCommand() {
     }
 
-    public SendPaymentToBillerCommand(Long paymentId, Long accountId, Long billerId, BigDecimal amount) {
+    public SendPaymentToBillerCommand(Long paymentId, Long accountId, Long billerId,
+                                      BigDecimal amount) {
         super(paymentId, accountId, billerId, amount);
     }
 }
