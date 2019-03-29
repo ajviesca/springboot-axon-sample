@@ -47,14 +47,14 @@ class DebitSourceAccountExecutorSpec extends Specification {
         def resultEvent = debitSourceAccountExecutor.execute().getResultEvent();
 
         then:
-        resultEvent.class == expectedEvent
+        resultEvent.class.simpleName == expectedEvent
 
         where:
         currentBalance | paymentAmount || expectedEvent
-        50             | 100           || SourceAccountInsufficientBalanceEvent.class
-        50             | 50.5          || SourceAccountInsufficientBalanceEvent.class
-        100            | 50            || SourceAccountDebitedEvent.class
-        100            | 100           || SourceAccountDebitedEvent.class
+        50             | 100           || SourceAccountInsufficientBalanceEvent.simpleName
+        50             | 50.5          || SourceAccountInsufficientBalanceEvent.simpleName
+        100            | 50            || SourceAccountDebitedEvent.simpleName
+        100            | 100           || SourceAccountDebitedEvent.simpleName
 
     }
 }
