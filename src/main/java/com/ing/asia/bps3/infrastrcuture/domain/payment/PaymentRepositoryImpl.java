@@ -10,15 +10,15 @@ import java.util.stream.Collectors;
 
 public class PaymentRepositoryImpl implements PaymentRepository {
 
-    private final PaymentEntityJPA paymentEntityJPA;
+    private final PaymentJPA paymentJPA;
 
-    public PaymentRepositoryImpl(PaymentEntityJPA paymentEntityJPA) {
-        this.paymentEntityJPA = paymentEntityJPA;
+    public PaymentRepositoryImpl(PaymentJPA paymentJPA) {
+        this.paymentJPA = paymentJPA;
     }
 
     @Override
     public List<Payment> findAll() {
-        List<PaymentEntity> payments = paymentEntityJPA.findAll();
+        List<PaymentEntity> payments = paymentJPA.findAll();
 
         return payments.stream().map(paymentEntity -> {
             BillerEntity billerEntity = paymentEntity.getBiller();
@@ -35,7 +35,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         BillerEntity billerEntity = new BillerEntity(sourceBiller.getId(), sourceBiller.getBillerName());
         PaymentEntity paymentEntity = new PaymentEntity(System.currentTimeMillis(), payment.getAmount(), billerEntity,
                 payment.getPostDate(), payment.getStatus(), payment.getPaidByAccountId());
-        PaymentEntity saved = paymentEntityJPA.save(paymentEntity);
+        PaymentEntity saved = paymentJPA.save(paymentEntity);
         billerEntity = saved.getBiller();
         return new Payment(saved.getId(), saved.getAmount(),
                 new Biller(billerEntity.getId(), billerEntity.getBillerName()),
@@ -44,7 +44,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     @Override
     public Payment findById(Long id) {
-        PaymentEntity paymentEntity = paymentEntityJPA.findById(id).get();
+        PaymentEntity paymentEntity = paymentJPA.findById(id).get();
         BillerEntity billerEntity = paymentEntity.getBiller();
         return new Payment(paymentEntity.getId(), paymentEntity.getAmount(),
                 new Biller(billerEntity.getId(), billerEntity.getBillerName()), paymentEntity.getPostDate(),
@@ -53,14 +53,14 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     @Override
     public Payment update(Payment payment) {
-        PaymentEntity paymentEntity = paymentEntityJPA.findById(payment.getId()).get();
+        PaymentEntity paymentEntity = paymentJPA.findById(payment.getId()).get();
         paymentEntity.setAmount(payment.getAmount());
         paymentEntity.setStatus(payment.getStatus());
         paymentEntity.setPostDate(payment.getPostDate());
         Biller biller = payment.getBiller();
         paymentEntity.setBiller(new BillerEntity(biller.getId(), biller.getBillerName()));
         paymentEntity.setPaidByAccountId(payment.getPaidByAccountId());
-        PaymentEntity saved = paymentEntityJPA.save(paymentEntity);
+        PaymentEntity saved = paymentJPA.save(paymentEntity);
         BillerEntity billerEntity = saved.getBiller();
         return new Payment(saved.getId(), saved.getAmount(),
                 new Biller(billerEntity.getId(), billerEntity.getBillerName()),

@@ -7,7 +7,7 @@ import com.ing.asia.bps3.core.domain.payment.PaymentRepository
 import com.ing.asia.bps3.core.domain.payment.PaymentStatus
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntity
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntity
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntityJPA
+import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentRepositoryImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -29,7 +29,7 @@ class PaymentRepositorySpec extends Specification {
     PaymentRepository paymentRepository;
 
     @Autowired
-    PaymentEntityJPA paymentJPA;
+    PaymentJPA paymentJPA;
 
     @Shared
     Biller meralcoBiller = new Biller(1L, "Meralco")
@@ -64,7 +64,7 @@ class PaymentRepositorySpec extends Specification {
 
         @Bean
         @Primary
-        PaymentRepository overrideDefaultPaymentRepository(PaymentEntityJPA paymentJPA) {
+        PaymentRepository overrideDefaultPaymentRepository(PaymentJPA paymentJPA) {
             return new PaymentRepositoryImpl(paymentJPA)
         }
     }

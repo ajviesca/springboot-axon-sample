@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 
 public class BillerRepositoryImpl implements BillerRepository {
 
-    private final BillerEntityJPA billerEntityJPA;
+    private final BillerJPA billerJPA;
 
-    public BillerRepositoryImpl(BillerEntityJPA billerEntityJPA) {
-        this.billerEntityJPA = billerEntityJPA;
+    public BillerRepositoryImpl(BillerJPA billerJPA) {
+        this.billerJPA = billerJPA;
     }
 
     @Override
     public List<Biller> findAll() {
-        List<BillerEntity> billers = billerEntityJPA.findAll();
+        List<BillerEntity> billers = billerJPA.findAll();
 
         return billers.stream().map(billerEntity ->
                 new Biller(billerEntity.getId(), billerEntity.getBillerName())
@@ -25,7 +25,7 @@ public class BillerRepositoryImpl implements BillerRepository {
 
     @Override
     public Biller findById(Long id) {
-        BillerEntity billerEntity = billerEntityJPA.findById(id).get();
+        BillerEntity billerEntity = billerJPA.findById(id).get();
         return new Biller(billerEntity.getId(), billerEntity.getBillerName());
     }
 }

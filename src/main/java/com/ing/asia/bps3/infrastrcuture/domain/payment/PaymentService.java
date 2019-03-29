@@ -9,6 +9,7 @@ public interface PaymentService {
 
     /**
      * Deprecated. Use PaymentService.postPaymentV2.
+     *
      * @param postPaymentCommand
      * @return
      */

@@ -1,8 +1,8 @@
 package com.ing.asia.bps3.configuration
 
-import com.ing.asia.bps3.infrastrcuture.domain.account.AccountEntityJPA
-import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntityJPA
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntityJPA
+import com.ing.asia.bps3.infrastrcuture.domain.account.AccountJPA
+import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerJPA
+import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 import org.springframework.boot.test.context.TestConfiguration
@@ -17,17 +17,17 @@ class JpaTestConfiguration {
     DetachedMockFactory detachedMockFactory = new DetachedMockFactory();
 
     @Bean
-    BillerEntityJPA billerEntityJPA() {
-        detachedMockFactory.Stub(BillerEntityJPA)
+    BillerJPA billerEntityJPA() {
+        detachedMockFactory.Stub(BillerJPA)
     }
 
     @Bean
-    PaymentEntityJPA paymentEntityJPA() {
-        detachedMockFactory.Stub(PaymentEntityJPA)
+    PaymentJPA paymentEntityJPA() {
+        detachedMockFactory.Stub(PaymentJPA)
     }
 
     @Bean
-    AccountEntityJPA accountEntityJPA() {
-        detachedMockFactory.Stub(AccountEntityJPA)
+    AccountJPA accountEntityJPA() {
+        detachedMockFactory.Stub(AccountJPA)
     }
 }

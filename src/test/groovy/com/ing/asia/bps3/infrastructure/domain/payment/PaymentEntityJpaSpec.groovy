@@ -3,7 +3,7 @@ package com.ing.asia.bps3.infrastructure.domain.payment
 
 import com.ing.asia.bps3.core.domain.payment.PaymentStatus
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntity
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntityJPA
+import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
@@ -19,7 +19,7 @@ class PaymentEntityJpaSpec extends Specification {
     TestEntityManager entityManager;
 
     @Autowired
-    PaymentEntityJPA paymentJPA;
+    PaymentJPA paymentJPA;
 
     def setup() {
         paymentJPA.deleteAll();

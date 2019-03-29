@@ -3,11 +3,11 @@ package com.ing.asia.bps3.configuration;
 import com.ing.asia.bps3.core.domain.account.AccountRepository;
 import com.ing.asia.bps3.core.domain.biller.BillerRepository;
 import com.ing.asia.bps3.core.domain.payment.PaymentRepository;
-import com.ing.asia.bps3.infrastrcuture.domain.account.AccountEntityJPA;
+import com.ing.asia.bps3.infrastrcuture.domain.account.AccountJPA;
 import com.ing.asia.bps3.infrastrcuture.domain.account.AccountRepositoryImpl;
-import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerEntityJPA;
+import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerJPA;
 import com.ing.asia.bps3.infrastrcuture.domain.biller.BillerRepositoryImpl;
-import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentEntityJPA;
+import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentJPA;
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,28 +17,28 @@ import org.springframework.context.annotation.Profile;
 @Profile("!test")
 public class RepositoryConfiguration {
 
-    private final PaymentEntityJPA paymentEntityJPA;
-    private final BillerEntityJPA billerEntityJPA;
-    private final AccountEntityJPA accountEntityJPA;
+    private final PaymentJPA paymentJPA;
+    private final BillerJPA billerJPA;
+    private final AccountJPA accountJPA;
 
-    public RepositoryConfiguration(PaymentEntityJPA paymentEntityJPA, BillerEntityJPA billerEntityJPA, AccountEntityJPA accountEntityJPA) {
-        this.paymentEntityJPA = paymentEntityJPA;
-        this.billerEntityJPA = billerEntityJPA;
-        this.accountEntityJPA = accountEntityJPA;
+    public RepositoryConfiguration(PaymentJPA paymentJPA, BillerJPA billerJPA, AccountJPA accountJPA) {
+        this.paymentJPA = paymentJPA;
+        this.billerJPA = billerJPA;
+        this.accountJPA = accountJPA;
     }
 
     @Bean
     public BillerRepository billerRepository() {
-        return new BillerRepositoryImpl(billerEntityJPA);
+        return new BillerRepositoryImpl(billerJPA);
     }
 
     @Bean
     public PaymentRepository paymentRepository() {
-        return new PaymentRepositoryImpl(paymentEntityJPA);
+        return new PaymentRepositoryImpl(paymentJPA);
     }
 
     @Bean
     public AccountRepository accountRepository() {
-        return new AccountRepositoryImpl(accountEntityJPA);
+        return new AccountRepositoryImpl(accountJPA);
     }
 }
