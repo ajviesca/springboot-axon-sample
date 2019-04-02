@@ -10,6 +10,7 @@ import com.ing.asia.bps3.core.domain.payment.PostPaymentFacade
 import com.ing.asia.bps3.core.event.payment.command.api.PostPaymentCommand
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentService
 import com.ing.asia.bps3.infrastrcuture.domain.payment.PaymentServiceImpl
+import org.junit.Ignore
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.TestConfiguration
@@ -38,6 +39,8 @@ class PaymentServiceSpec extends Specification {
     @Shared
     Biller meralcoBiller = new Biller(1L, "Meralco")
 
+    @Ignore
+    @Deprecated
     def 'should post payment with status PLACED'() {
         given:
         PostPaymentCommand paymentSave = new PostPaymentCommand(billerId: 1L, paymentAmount: 100.0, accountId: 1L)

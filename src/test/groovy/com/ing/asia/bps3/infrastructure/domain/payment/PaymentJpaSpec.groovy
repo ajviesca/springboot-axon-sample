@@ -13,7 +13,7 @@ import spock.lang.Unroll
 import java.time.LocalDateTime
 
 @DataJpaTest
-class PaymentEntityJpaSpec extends Specification {
+class PaymentJpaSpec extends Specification {
 
     @Autowired
     TestEntityManager entityManager
