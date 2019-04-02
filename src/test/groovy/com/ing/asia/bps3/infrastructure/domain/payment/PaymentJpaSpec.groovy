@@ -63,8 +63,8 @@ class PaymentJpaSpec extends Specification {
 
         for (int i = 0; i < numberOfPayments; i++) {
             payments.add(
-                    new PaymentEntity(id: System.currentTimeMillis() + i, amount: System.currentTimeMillis(), postDate: LocalDateTime.now(),
-                            status: PaymentStatus.PLACED)
+                    new PaymentEntity(id: System.currentTimeMillis() + i, amount: System.currentTimeMillis(),
+                            postDate: LocalDateTime.now(), status: PaymentStatus.PLACED)
             )
         }
 

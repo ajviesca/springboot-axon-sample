@@ -70,7 +70,9 @@ class PaymentServiceSpec extends Specification {
 
         @Bean
         @Primary
-        PaymentService overrideDefaultPaymentService(PostPaymentFacade postPaymentFacade, PaymentRepository paymentRepository, BillerRepository billerRepository) {
+        PaymentService overrideDefaultPaymentService(PostPaymentFacade postPaymentFacade,
+                                                     PaymentRepository paymentRepository,
+                                                     BillerRepository billerRepository) {
             return new PaymentServiceImpl(postPaymentFacade, paymentRepository, billerRepository)
         }
     }

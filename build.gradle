@@ -6,6 +6,7 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
 apply plugin: 'groovy'
+apply plugin: 'jacoco'
 
 group = 'com.ing.asia'
 version = '0.0.1-SNAPSHOT'
@@ -23,30 +24,30 @@ repositories {
 }
 
 
-def AXON_STARTER_VERSION='4.1'
-def SPOCK_VERSION='1.2-groovy-2.5'
+def AXON_STARTER_VERSION = '4.1'
+def SPOCK_VERSION = '1.2-groovy-2.5'
 
 dependencies {
 
-    implementation (
+    implementation(
             'org.springframework.boot:spring-boot-starter-data-jpa',
             'org.springframework.boot:spring-boot-starter-web',
             "org.axonframework:axon-spring-boot-starter:${AXON_STARTER_VERSION}"
     )
 
-    compileOnly (
+    compileOnly(
             'org.projectlombok:lombok'
     )
 
-    runtimeOnly (
+    runtimeOnly(
             'com.h2database:h2'
     )
 
-    testRuntime (
+    testRuntime(
             'com.h2database:h2'
     )
 
-    annotationProcessor (
+    annotationProcessor(
             'org.projectlombok:lombok'
     )
 
@@ -56,3 +57,5 @@ dependencies {
             "org.spockframework:spock-spring:${SPOCK_VERSION}"
     )
 }
+
+test.finalizedBy jacocoTestReport
