@@ -40,9 +40,9 @@ public class PostPaymentFacade {
             return markPaymentAs(FAILED_INSUFFICIENT_BALANCE, paymentId, accountId, billerId, paymentAmount);
         }
 
-        BasePaymentEvent sendPaymentToBillerReultEvent = sendPaymentToBiller(paymentId, accountId, billerId, paymentAmount);
+        BasePaymentEvent sendPaymentToBillerResultEvent = sendPaymentToBiller(paymentId, accountId, billerId, paymentAmount);
 
-        if (isPaymentUnsuccesful(sendPaymentToBillerReultEvent)) {
+        if (isPaymentUnsuccesful(sendPaymentToBillerResultEvent)) {
             new ReversePaymentExecutor(accountRepository,
                     new ReversePaymentCommand(paymentId, accountId, billerId, paymentAmount))
                     .execute();
