@@ -54,6 +54,7 @@ public class DebitSourceAccountExecutor {
 
     private void getAccountCurrentBalance() {
         currentBalance = account.getBalance();
+
     }
 
     private void deductPaymentAmountFromCurrentBalance() {
