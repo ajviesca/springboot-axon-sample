@@ -43,13 +43,17 @@ public class PostPaymentFacade {
         BasePaymentEvent sendPaymentToBillerResultEvent = sendPaymentToBiller(paymentId, accountId, billerId, paymentAmount);
 
         if (isPaymentUnsuccesful(sendPaymentToBillerResultEvent)) {
-            new ReversePaymentExecutor(accountRepository,
-                    new ReversePaymentCommand(paymentId, accountId, billerId, paymentAmount))
-                    .execute();
+            reversePaymentDeductionFromSourceAccount(paymentId, accountId, billerId, paymentAmount);
             return markPaymentAs(FAILED_AND_REVERSED, paymentId, accountId, billerId, paymentAmount);
         }
 
         return markPaymentAs(COMPLETED, paymentId, accountId, billerId, paymentAmount);
+    }
+
+    private void reversePaymentDeductionFromSourceAccount(Long paymentId, Long accountId, Long billerId, BigDecimal paymentAmount) {
+        new ReversePaymentExecutor(accountRepository,
+                new ReversePaymentCommand(paymentId, accountId, billerId, paymentAmount))
+                .execute();
     }
 
     private boolean isPaymentUnsuccesful(BasePaymentEvent sendPaymentToBillerReultEvent) {
