@@ -23,7 +23,7 @@ import spock.lang.Specification
 
 import java.time.LocalDateTime
 
-@SpringBootTest(classes = [BpsTestConfiguration, PaymentControllerSpecificationConfig])
+@SpringBootTest(classes = [BpsTestConfiguration, PaymentServiceSpecConfig])
 @ActiveProfiles("test")
 class PaymentServiceSpec extends Specification {
 
@@ -66,7 +66,7 @@ class PaymentServiceSpec extends Specification {
 
     @TestConfiguration
     @Profile("test")
-    static class PaymentControllerSpecificationConfig {
+    static class PaymentServiceSpecConfig {
 
         @Bean
         @Primary
