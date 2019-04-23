@@ -55,7 +55,7 @@ class UpdatePaymentStatusExecutorSpec extends Specification {
 
         then:
         verifyAll {
-            updatePaymentStatusExecutor.payment.status.equals(expected)
+            updatePaymentStatusExecutor.payment.status == expected
             resultEvent instanceof PaymentEndedEvent
         }
 

@@ -59,7 +59,7 @@ class PaymentServiceSpec extends Specification {
 
         then:
         paymentResult.id != null
-        paymentResult.amount.compareTo(paymentSave.getPaymentAmount()) == 0
+        paymentResult.amount == paymentSave.getPaymentAmount()
         paymentResult.biller.id == paymentSave.billerId
         paymentResult.status == PaymentStatus.PLACED
     }

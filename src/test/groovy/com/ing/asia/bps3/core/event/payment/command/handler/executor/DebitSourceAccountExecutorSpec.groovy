@@ -18,7 +18,7 @@ import spock.lang.Unroll
 class DebitSourceAccountExecutorSpec extends Specification {
 
     @Autowired
-    AccountRepository accountRepository;
+    AccountRepository accountRepository
 
     @Shared
     def paymentId = 1L
@@ -44,7 +44,7 @@ class DebitSourceAccountExecutorSpec extends Specification {
         accountRepository.save(_) >> new Account(accountId, "Juan dela Cruz", currentBalance - paymentAmount)
 
         when:
-        def resultEvent = debitSourceAccountExecutor.execute().getResultEvent();
+        def resultEvent = debitSourceAccountExecutor.execute().getResultEvent()
 
         then:
         resultEvent.class.simpleName == expectedEvent
